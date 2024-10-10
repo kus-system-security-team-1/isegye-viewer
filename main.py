@@ -1,10 +1,10 @@
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
 
 
 def main():
     app = QApplication(sys.argv)
-    window = QWidget()
+    window = QMainWindow()
     window.show()
     app.exec()
 

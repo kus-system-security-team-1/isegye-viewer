@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMessageBox
 from modules.main.main_service import MainService
-from views.main_window import MainWindow
+from modules.main.main_view import MainWindow
 
 
 class MainController:

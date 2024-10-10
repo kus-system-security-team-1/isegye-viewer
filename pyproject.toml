@@ -1,0 +1,5 @@
+[tool.black]
+line-length = 79
+target-version = ["py310", "py311", "py312"]
+skip-string-normalization = true
+exclude = ".git|.ui|.gitignore|.txt|.flake8|build"

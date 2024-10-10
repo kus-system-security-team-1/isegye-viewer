@@ -17,7 +17,8 @@ class MainWindow(QMainWindow):
     def init_ui(self):
         if self.app_module:
             self.controller = self.app_module.get_controller("MainController")
-            if self.controller:
-                self.pushButton.clicked.connect(
-                    self.controller.handle_button_click
-                )
+        if not self.controller:
+            return
+        self.pushButton.clicked.connect(
+            self.controller.handle_button_click
+        )

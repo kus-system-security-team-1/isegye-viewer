@@ -7,9 +7,7 @@ class AppModule:
         self.controllers = {}
 
     def init_modules(self):
-        self._load_modules("modules.main.controllers", "Controller")
-        self._load_modules("modules.process_monitor.controllers", "Controller")
-        self._load_modules("modules.network_monitor.controllers", "Controller")
+        self._load_modules("modules.main", "Controller")
 
     def _load_modules(self, package_path, class_suffix):
         package = importlib.import_module(package_path)

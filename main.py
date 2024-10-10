@@ -1,12 +1,20 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication
+from views.main_window import MainWindow
+from core.app_module import AppModule
 import sys
 
 
 def main():
     app = QApplication(sys.argv)
-    window = QMainWindow()
+    app_module = AppModule()
+    app_module.init_modules()
+
+    window = MainWindow()
+    window.set_app_module(app_module)
+
     window.show()
-    app.exec()
+
+    sys.exit(app.exec_())
 
 
 if __name__ == "__main__":

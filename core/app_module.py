@@ -8,6 +8,7 @@ class AppModule:
 
     def init_modules(self):
         self._load_modules("modules.main", "Controller")
+        self._load_modules("modules.process", "Controller")
 
     def _load_modules(self, package_path, class_suffix):
         package = importlib.import_module(package_path)

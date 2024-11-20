@@ -1,7 +1,9 @@
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QIcon
 from modules.main.main_view import MainWindow
 from core.app_module import AppModule
 import sys
+
 
 
 def main():
@@ -11,7 +13,8 @@ def main():
 
     window = MainWindow()
     window.set_app_module(app_module)
-
+    window.setWindowTitle("Isegye Viewer")
+    window.setWindowIcon(QIcon('ui/resources/favicon.png'))
     window.show()
 
     sys.exit(app.exec_())

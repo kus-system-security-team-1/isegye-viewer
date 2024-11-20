@@ -5,10 +5,13 @@ from modules.main.main_view import MainWindow
 
 class MainController:
     def __init__(self, config):
-        self.view = MainWindow()
+        self.view = MainWindow()    
         self.config = config
         self.service = MainService(config)
 
-    def handle_button_click(self):
-        message = self.service.process_data("Button clicked")
-        QMessageBox.information(self.view, "Info", message)
+    def show_subpage(self, index): # 하위 페이지 보여주기
+        self.view.mainstackedWidget.setCurrentIndex(1)
+        self.view.page_widget.setCurrentIndex(index)
+        
+
+    

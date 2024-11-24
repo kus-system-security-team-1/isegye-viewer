@@ -233,7 +233,7 @@
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="../resources/resources.qrc">:/logo/images/logo.png</pixmap>
+             <pixmap resource="../resources/resources.qrc">:/logo/images/logo.jfif</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>

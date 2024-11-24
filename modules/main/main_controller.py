@@ -10,7 +10,6 @@ class MainController:
         self.service = MainService(config)
 
     def show_subpage(self, index): # 하위 페이지 보여주기
-        self.view.mainstackedWidget.setCurrentIndex(1)
         self.view.page_widget.setCurrentIndex(index)
         
 

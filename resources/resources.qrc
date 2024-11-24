@@ -1,0 +1,19 @@
+<RCC>
+  <qresource prefix="logo">
+    <file>images/favicon.png</file>
+    <file>images/logo.png</file>
+  </qresource>
+  <qresource prefix="Icons">
+    <file>images/+.png</file>
+    <file>images/earth.png</file>
+    <file>images/eye.png</file>
+    <file>images/home.png</file>
+    <file>images/left.png</file>
+    <file>images/list.png</file>
+    <file>images/off-button.png</file>
+    <file>images/on-button.png</file>
+    <file>images/question.png</file>
+    <file>images/right.png</file>
+    <file>images/search.png</file>
+  </qresource>
+</RCC>

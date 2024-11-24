@@ -14,7 +14,7 @@ def main():
     window = MainWindow()
     window.set_app_module(app_module)
     window.setWindowTitle("Isegye Viewer")
-    window.setWindowIcon(QIcon('ui/resources/favicon.png'))
+    window.setWindowIcon(QIcon('resources/images/favicon.png'))
     window.show()
 
     sys.exit(app.exec_())

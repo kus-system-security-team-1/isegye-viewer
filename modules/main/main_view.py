@@ -21,9 +21,10 @@ class MainWindow(QMainWindow):
         if self.app_module:
             self.controller = self.app_module.get_controller("MainController")
         if not self.controller:
-            return 
+            return
         self.btn_process.clicked.connect(
-            lambda: self.controller.show_subpage(0) 
+            lambda: self.controller.show_subpage(0)
         )
-    
-        
+        self.btn_history.clicked.connect(
+            lambda: self.controller.show_subpage(1)
+        )

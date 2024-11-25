@@ -1,16 +1,13 @@
-from PyQt5.QtWidgets import QMessageBox
 from modules.main.main_service import MainService
-from modules.main.main_view import MainWindow
 
 
 class MainController:
-    def __init__(self, config):
-        self.view = MainWindow()    
+    def __init__(self, config, view=None):
+        self.view = view
         self.config = config
         self.service = MainService(config)
+        print(f"MainController initialized with view: {self.view}")
 
-    def show_subpage(self, index): # 하위 페이지 보여주기
-        self.view.page_widget.setCurrentIndex(index)
-        
-
-    
+    def show_subpage(self, index):
+        if self.view:
+            self.view.page_widget.setCurrentIndex(index)

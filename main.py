@@ -5,13 +5,14 @@ from core.app_module import AppModule
 import sys
 
 
-
 def main():
     app = QApplication(sys.argv)
-    app_module = AppModule()
-    app_module.init_modules()
 
     window = MainWindow()
+
+    app_module = AppModule()
+    app_module.init_modules(main_window=window)
+
     window.set_app_module(app_module)
     window.setWindowTitle("Isegye Viewer")
     window.setWindowIcon(QIcon('resources/images/favicon.png'))

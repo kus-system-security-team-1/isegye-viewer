@@ -6,11 +6,11 @@ class AppModule:
     def __init__(self):
         self.controllers = {}
 
-    def init_modules(self):
-        self._load_modules("modules.main", "Controller")
-        self._load_modules("modules.process", "Controller")
+    def init_modules(self, main_window=None):
+        self._load_modules("modules.main", "Controller", main_window)
+        self._load_modules("modules.process", "Controller", main_window)
 
-    def _load_modules(self, package_path, class_suffix):
+    def _load_modules(self, package_path, class_suffix, main_window=None):
         package = importlib.import_module(package_path)
         package_dir = package.__path__[0]
 
@@ -23,7 +23,9 @@ class AppModule:
                 for attribute_name in dir(module):
                     if attribute_name.endswith(class_suffix):
                         controller_class = getattr(module, attribute_name)
-                        instance = controller_class(config={})
+                        instance = controller_class(
+                            config={}, view=main_window
+                        )
                         self.controllers[attribute_name] = instance
 
     def get_controller(self, controller_name):

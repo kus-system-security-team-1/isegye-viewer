@@ -6,7 +6,6 @@ class MainController:
         self.view = view
         self.config = config
         self.service = MainService(config)
-        print(f"MainController initialized with view: {self.view}")
 
     def show_subpage(self, index):
         if self.view:

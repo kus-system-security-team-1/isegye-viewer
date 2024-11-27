@@ -4,6 +4,7 @@
     <file>images/logo.jfif</file>
   </qresource>
   <qresource prefix="Icons">
+    <file>images/dot.png</file>
     <file>images/+.png</file>
     <file>images/earth.png</file>
     <file>images/eye.png</file>

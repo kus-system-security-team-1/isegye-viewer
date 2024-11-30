@@ -598,7 +598,7 @@ QPushButton:checked {
              <item>
               <widget class="QPushButton" name="btn_test">
                <property name="text">
-                <string>test</string>
+                <string>alert 확인용(추후 삭제)</string>
                </property>
               </widget>
              </item>
@@ -824,7 +824,7 @@ QFrame {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="page_process_info_menu">
              <property name="sizePolicy">
@@ -3871,7 +3871,7 @@ QFrame {
               <item>
                <widget class="QStackedWidget" name="network_stackedWidget">
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="network_process_page">
                  <layout class="QVBoxLayout" name="verticalLayout_29">
@@ -5257,7 +5257,7 @@ QFrame#prev_table_frame {
                               <bool>false</bool>
                              </attribute>
                              <attribute name="horizontalHeaderDefaultSectionSize">
-                              <number>264</number>
+                              <number>348</number>
                              </attribute>
                              <attribute name="horizontalHeaderHighlightSections">
                               <bool>true</bool>
@@ -5324,11 +5324,6 @@ QFrame#prev_table_frame {
                              <column>
                               <property name="text">
                                <string>날짜</string>
-                              </property>
-                             </column>
-                             <column>
-                              <property name="text">
-                               <string>결과</string>
                               </property>
                              </column>
                              <item row="0" column="0">

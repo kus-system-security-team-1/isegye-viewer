@@ -142,7 +142,19 @@
 	
 }
 
-</string>
+QHeaderView::section {
+	background-color: transparent;
+	color: #718EBF;
+}
+
+QTableWidget::item {
+	border-bottom: 1px solid #E6EFF5;
+}
+
+QTableWidget::item::selected {
+	color: black;
+	background-color: #eeeeee;
+}</string>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
@@ -583,6 +595,13 @@ QPushButton:checked {
                </attribute>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="btn_test">
+               <property name="text">
+                <string>test</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -805,7 +824,7 @@ QFrame {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="page_process_info_menu">
              <property name="sizePolicy">
@@ -855,9 +874,6 @@ QFrame {
 
 }
 
-QLineEdit::focus {
-	border: 1px solid rgb(85, 85, 255);
-}
 QFrame#process_search_bar_3 {
 	background-color: #E5E5EA;
 	border-radius: 20px;
@@ -893,7 +909,7 @@ QFrame#process_info_btn_group {
                  <item>
                   <widget class="QStackedWidget" name="process_stackedWidget">
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="search_page">
                     <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -1291,7 +1307,7 @@ QPushButton::hover {
 
 #dll_table_frame, #basic_info_table_frame, #pe_info_table_frame, #filtering_table_frame {
 	border-radius: 25px;
-	margin: 0px 20px 0px 20px;
+
 }
 
 #description {
@@ -1343,19 +1359,7 @@ QLineEdit {
                            </size>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">QHeaderView::section {
-	background-color: transparent;
-	color: #718EBF;
-}
-
-QTableWidget::item {
-	border-bottom: 1px solid #E6EFF5;
-}
-
-QTableWidget::item::selected {
-	color: black;
-	background-color: #eeeeee;
-}</string>
+                           <string notr="true"/>
                           </property>
                           <property name="frameShape">
                            <enum>QFrame::StyledPanel</enum>
@@ -1368,13 +1372,13 @@ QTableWidget::item::selected {
                             <number>0</number>
                            </property>
                            <property name="leftMargin">
-                            <number>9</number>
+                            <number>18</number>
                            </property>
                            <property name="topMargin">
                             <number>0</number>
                            </property>
                            <property name="rightMargin">
-                            <number>0</number>
+                            <number>18</number>
                            </property>
                            <property name="bottomMargin">
                             <number>0</number>
@@ -1427,7 +1431,7 @@ QTableWidget::item::selected {
                               <bool>false</bool>
                              </property>
                              <property name="selectionMode">
-                              <enum>QAbstractItemView::SingleSelection</enum>
+                              <enum>QAbstractItemView::NoSelection</enum>
                              </property>
                              <property name="selectionBehavior">
                               <enum>QAbstractItemView::SelectRows</enum>
@@ -1454,7 +1458,7 @@ QTableWidget::item::selected {
                               <bool>false</bool>
                              </attribute>
                              <attribute name="horizontalHeaderDefaultSectionSize">
-                              <number>177</number>
+                              <number>200</number>
                              </attribute>
                              <attribute name="horizontalHeaderHighlightSections">
                               <bool>true</bool>
@@ -1523,19 +1527,7 @@ QTableWidget::item::selected {
                            </size>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">QHeaderView::section {
-	background-color: transparent;
-	color: #718EBF;
-}
-
-QTableWidget::item {
-	border-bottom: 1px solid #E6EFF5;
-}
-
-QTableWidget::item::selected {
-	color: black;
-	background-color: #eeeeee;
-}</string>
+                           <string notr="true"/>
                           </property>
                           <property name="frameShape">
                            <enum>QFrame::StyledPanel</enum>
@@ -1544,8 +1536,14 @@ QTableWidget::item::selected {
                            <enum>QFrame::Raised</enum>
                           </property>
                           <layout class="QHBoxLayout" name="horizontalLayout_29">
+                           <property name="leftMargin">
+                            <number>18</number>
+                           </property>
                            <property name="topMargin">
                             <number>0</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>18</number>
                            </property>
                            <property name="bottomMargin">
                             <number>0</number>
@@ -1616,7 +1614,7 @@ QTableWidget::item::selected {
                               <bool>true</bool>
                              </property>
                              <property name="rowCount">
-                              <number>1</number>
+                              <number>222</number>
                              </property>
                              <attribute name="horizontalHeaderVisible">
                               <bool>false</bool>
@@ -1625,7 +1623,7 @@ QTableWidget::item::selected {
                               <bool>false</bool>
                              </attribute>
                              <attribute name="horizontalHeaderDefaultSectionSize">
-                              <number>150</number>
+                              <number>152</number>
                              </attribute>
                              <attribute name="horizontalHeaderHighlightSections">
                               <bool>true</bool>
@@ -1648,6 +1646,227 @@ QTableWidget::item::selected {
                              <attribute name="verticalHeaderStretchLastSection">
                               <bool>false</bool>
                              </attribute>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
                              <row/>
                              <column>
                               <property name="text">
@@ -1679,6 +1898,66 @@ QTableWidget::item::selected {
                                <string>이름</string>
                               </property>
                              </column>
+                             <item row="0" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="0" column="1">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="0" column="2">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="0" column="3">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="0" column="4">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="0" column="5">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="1" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="1" column="1">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="1" column="2">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="1" column="3">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="1" column="4">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="1" column="5">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
                             </widget>
                            </item>
                           </layout>
@@ -1794,7 +2073,7 @@ QTableWidget::item::selected {
                               </size>
                              </property>
                              <property name="text">
-                              <string>  세부 DLL 목록</string>
+                              <string>  세부 dll 목록</string>
                              </property>
                             </widget>
                            </item>
@@ -1935,11 +2214,12 @@ QTableWidget::item::selected {
                           <property name="styleSheet">
                            <string notr="true">QLabel {
 	background-color: transparent;
-	margin: 9px;
+
 	font: 81 18pt &quot;SUIT ExtraBold&quot;;
 	color: #333B69;
-	margin-top: 10px;
-	margin-left: 15px;
+ 	margin-left: 9px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 	font-size: 22px;
 }
 
@@ -1950,6 +2230,21 @@ QTableWidget::item::selected {
 #filtering_table_frame, #pe_info_table_frame {
 	border-radius: 25px;
 	margin: 0px 20px 0px 20px;
+}
+
+#filtering_header_frame {
+	background-color: transparent;
+}
+
+#filtering_search_bar_frame {
+	background-color: #e5e5eA;
+	border-radius: 18px;
+	font-size: 16px;
+}
+
+QLineEdit {
+	background-color: transparent;
+	border: none;
 }</string>
                           </property>
                           <property name="frameShape">
@@ -2013,12 +2308,24 @@ QTableWidget::item::selected {
                                  </size>
                                 </property>
                                 <property name="text">
-                                 <string>PE파일 정보 분석</string>
+                                 <string>  PE파일 정보 분석</string>
                                 </property>
                                </widget>
                               </item>
                               <item row="1" column="0">
                                <widget class="QFrame" name="pe_info_table_frame">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>430</width>
+                                  <height>0</height>
+                                 </size>
+                                </property>
                                 <property name="maximumSize">
                                  <size>
                                   <width>430</width>
@@ -2026,19 +2333,7 @@ QTableWidget::item::selected {
                                  </size>
                                 </property>
                                 <property name="styleSheet">
-                                 <string notr="true">QHeaderView::section {
-	background-color: transparent;
-	color: #718EBF;
-}
-
-QTableWidget::item {
-	border-bottom: 1px solid #E6EFF5;
-}
-
-QTableWidget::item::selected {
-	color: black;
-	background-color: #eeeeee;
-}</string>
+                                 <string notr="true"/>
                                 </property>
                                 <property name="frameShape">
                                  <enum>QFrame::StyledPanel</enum>
@@ -2192,19 +2487,6 @@ QTableWidget::item::selected {
                               <property name="spacing">
                                <number>0</number>
                               </property>
-                              <item row="0" column="0">
-                               <widget class="QLabel" name="filtering_header">
-                                <property name="maximumSize">
-                                 <size>
-                                  <width>16777215</width>
-                                  <height>50</height>
-                                 </size>
-                                </property>
-                                <property name="text">
-                                 <string>필터링 목록</string>
-                                </property>
-                               </widget>
-                              </item>
                               <item row="1" column="0">
                                <widget class="QFrame" name="filtering_table_frame">
                                 <property name="sizePolicy">
@@ -2215,24 +2497,12 @@ QTableWidget::item::selected {
                                 </property>
                                 <property name="maximumSize">
                                  <size>
-                                  <width>430</width>
+                                  <width>450</width>
                                   <height>16777215</height>
                                  </size>
                                 </property>
                                 <property name="styleSheet">
-                                 <string notr="true">QHeaderView::section {
-	background-color: transparent;
-	color: #718EBF;
-}
-
-QTableWidget::item {
-	border-bottom: 1px solid #E6EFF5;
-}
-
-QTableWidget::item::selected {
-	color: black;
-	background-color: #eeeeee;
-}</string>
+                                 <string notr="true"/>
                                 </property>
                                 <property name="frameShape">
                                  <enum>QFrame::StyledPanel</enum>
@@ -2241,7 +2511,7 @@ QTableWidget::item::selected {
                                  <enum>QFrame::Raised</enum>
                                 </property>
                                 <layout class="QGridLayout" name="gridLayout_11">
-                                 <item row="0" column="0">
+                                 <item row="1" column="0">
                                   <widget class="QTableWidget" name="filtering_table">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
@@ -2355,6 +2625,190 @@ QTableWidget::item::selected {
                                      <string>감지 여부</string>
                                     </property>
                                    </column>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                              <item row="0" column="0">
+                               <widget class="QFrame" name="filtering_header_frame">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>450</width>
+                                  <height>50</height>
+                                 </size>
+                                </property>
+                                <property name="frameShape">
+                                 <enum>QFrame::StyledPanel</enum>
+                                </property>
+                                <property name="frameShadow">
+                                 <enum>QFrame::Raised</enum>
+                                </property>
+                                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="leftMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>20</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QLabel" name="filtering_header">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>50</height>
+                                    </size>
+                                   </property>
+                                   <property name="text">
+                                    <string>  필터링 목록</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QFrame" name="filtering_search_bar_frame">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>290</width>
+                                     <height>40</height>
+                                    </size>
+                                   </property>
+                                   <property name="styleSheet">
+                                    <string notr="true"/>
+                                   </property>
+                                   <property name="frameShape">
+                                    <enum>QFrame::StyledPanel</enum>
+                                   </property>
+                                   <property name="frameShadow">
+                                    <enum>QFrame::Raised</enum>
+                                   </property>
+                                   <layout class="QHBoxLayout" name="horizontalLayout_21">
+                                    <property name="spacing">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="leftMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="topMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="rightMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="bottomMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <item>
+                                     <layout class="QHBoxLayout" name="horizontalLayout_30">
+                                      <property name="spacing">
+                                       <number>0</number>
+                                      </property>
+                                      <item>
+                                       <widget class="QLabel" name="search_icon_4">
+                                        <property name="sizePolicy">
+                                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                          <horstretch>0</horstretch>
+                                          <verstretch>0</verstretch>
+                                         </sizepolicy>
+                                        </property>
+                                        <property name="minimumSize">
+                                         <size>
+                                          <width>50</width>
+                                          <height>40</height>
+                                         </size>
+                                        </property>
+                                        <property name="maximumSize">
+                                         <size>
+                                          <width>50</width>
+                                          <height>50</height>
+                                         </size>
+                                        </property>
+                                        <property name="baseSize">
+                                         <size>
+                                          <width>40</width>
+                                          <height>40</height>
+                                         </size>
+                                        </property>
+                                        <property name="styleSheet">
+                                         <string notr="true">background-color: transparent;</string>
+                                        </property>
+                                        <property name="text">
+                                         <string/>
+                                        </property>
+                                        <property name="textFormat">
+                                         <enum>Qt::AutoText</enum>
+                                        </property>
+                                        <property name="pixmap">
+                                         <pixmap resource="../resources/resources.qrc">:/Icons/images/search.png</pixmap>
+                                        </property>
+                                       </widget>
+                                      </item>
+                                      <item alignment="Qt::AlignLeft">
+                                       <widget class="QLineEdit" name="filtering_search_bar">
+                                        <property name="sizePolicy">
+                                         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                                          <horstretch>0</horstretch>
+                                          <verstretch>0</verstretch>
+                                         </sizepolicy>
+                                        </property>
+                                        <property name="minimumSize">
+                                         <size>
+                                          <width>350</width>
+                                          <height>0</height>
+                                         </size>
+                                        </property>
+                                        <property name="maximumSize">
+                                         <size>
+                                          <width>934</width>
+                                          <height>30</height>
+                                         </size>
+                                        </property>
+                                        <property name="font">
+                                         <font>
+                                          <family>SUIT SemiBold</family>
+                                          <pointsize>14</pointsize>
+                                          <weight>7</weight>
+                                          <italic>false</italic>
+                                          <bold>false</bold>
+                                         </font>
+                                        </property>
+                                        <property name="acceptDrops">
+                                         <bool>false</bool>
+                                        </property>
+                                        <property name="text">
+                                         <string/>
+                                        </property>
+                                        <property name="frame">
+                                         <bool>true</bool>
+                                        </property>
+                                        <property name="alignment">
+                                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                                        </property>
+                                        <property name="placeholderText">
+                                         <string>+ 필터링 할 dll을 실행 전 추가</string>
+                                        </property>
+                                        <property name="clearButtonEnabled">
+                                         <bool>false</bool>
+                                        </property>
+                                       </widget>
+                                      </item>
+                                     </layout>
+                                    </item>
+                                   </layout>
                                   </widget>
                                  </item>
                                 </layout>
@@ -2619,19 +3073,7 @@ QFrame#history_table_frame {
                         </size>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true">QHeaderView::section {
-	background-color: transparent;
-	color: #718EBF;
-}
-
-QTableWidget::item {
-	border-bottom: 1px solid #E6EFF5;
-}
-
-QTableWidget::item::selected {
-	color: black;
-	background-color: #eeeeee;
-}</string>
+                        <string notr="true"/>
                        </property>
                        <property name="frameShape">
                         <enum>QFrame::StyledPanel</enum>
@@ -2640,6 +3082,12 @@ QTableWidget::item::selected {
                         <enum>QFrame::Raised</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_24">
+                        <property name="leftMargin">
+                         <number>18</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>18</number>
+                        </property>
                         <item>
                          <widget class="QTableWidget" name="history_table">
                           <property name="horizontalScrollBarPolicy">
@@ -2679,13 +3127,13 @@ QTableWidget::item::selected {
                            <bool>true</bool>
                           </property>
                           <property name="rowCount">
-                           <number>9</number>
+                           <number>22</number>
                           </property>
                           <attribute name="horizontalHeaderVisible">
                            <bool>false</bool>
                           </attribute>
                           <attribute name="horizontalHeaderDefaultSectionSize">
-                           <number>183</number>
+                           <number>180</number>
                           </attribute>
                           <attribute name="horizontalHeaderHighlightSections">
                            <bool>true</bool>
@@ -2711,6 +3159,19 @@ QTableWidget::item::selected {
                           <attribute name="verticalHeaderStretchLastSection">
                            <bool>false</bool>
                           </attribute>
+                          <row/>
+                          <row/>
+                          <row/>
+                          <row/>
+                          <row/>
+                          <row/>
+                          <row/>
+                          <row/>
+                          <row/>
+                          <row/>
+                          <row/>
+                          <row/>
+                          <row/>
                           <row/>
                           <row/>
                           <row/>
@@ -2752,7 +3213,32 @@ QTableWidget::item::selected {
                           </column>
                           <item row="0" column="0">
                            <property name="text">
-                            <string/>
+                            <string>test</string>
+                           </property>
+                          </item>
+                          <item row="0" column="1">
+                           <property name="text">
+                            <string>tset</string>
+                           </property>
+                          </item>
+                          <item row="0" column="2">
+                           <property name="text">
+                            <string>set</string>
+                           </property>
+                          </item>
+                          <item row="0" column="3">
+                           <property name="text">
+                            <string>set</string>
+                           </property>
+                          </item>
+                          <item row="0" column="4">
+                           <property name="text">
+                            <string>set</string>
+                           </property>
+                          </item>
+                          <item row="0" column="5">
+                           <property name="text">
+                            <string>est</string>
                            </property>
                           </item>
                           <item row="1" column="0">
@@ -2916,16 +3402,15 @@ QPushButton#btn_history_analyze::hover {
 
 QFrame {
 	border-radius: 25px;
-	margin: 0px 30px 0px 30px;
 }
 </string>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_25">
                      <property name="leftMargin">
-                      <number>0</number>
+                      <number>30</number>
                      </property>
                      <property name="rightMargin">
-                      <number>0</number>
+                      <number>30</number>
                      </property>
                      <item>
                       <widget class="QLabel" name="history_title">
@@ -2941,7 +3426,7 @@ QFrame {
                       </widget>
                      </item>
                      <item>
-                      <widget class="QFrame" name="history_start_stop_log_table_frame">
+                      <widget class="QFrame" name="history_ss_log_table_frame">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                          <horstretch>0</horstretch>
@@ -2961,19 +3446,7 @@ QFrame {
                         </size>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true">QHeaderView::section {
-	background-color: transparent;
-	color: #718EBF;
-}
-
-QTableWidget::item {
-	border-bottom: 1px solid #E6EFF5;
-}
-
-QTableWidget::item::selected {
-	color: black;
-	background-color: #eeeeee;
-}</string>
+                        <string notr="true"/>
                        </property>
                        <property name="frameShape">
                         <enum>QFrame::StyledPanel</enum>
@@ -2986,19 +3459,19 @@ QTableWidget::item::selected {
                          <number>0</number>
                         </property>
                         <property name="leftMargin">
-                         <number>0</number>
+                         <number>18</number>
                         </property>
                         <property name="topMargin">
                          <number>0</number>
                         </property>
                         <property name="rightMargin">
-                         <number>0</number>
+                         <number>18</number>
                         </property>
                         <property name="bottomMargin">
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QTableWidget" name="history_start_stop_log_table">
+                         <widget class="QTableWidget" name="history_ss_log_table">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
                             <horstretch>0</horstretch>
@@ -3039,7 +3512,7 @@ QTableWidget::item::selected {
                            <bool>false</bool>
                           </property>
                           <property name="selectionMode">
-                           <enum>QAbstractItemView::SingleSelection</enum>
+                           <enum>QAbstractItemView::NoSelection</enum>
                           </property>
                           <property name="selectionBehavior">
                            <enum>QAbstractItemView::SelectRows</enum>
@@ -3066,7 +3539,7 @@ QTableWidget::item::selected {
                            <bool>false</bool>
                           </attribute>
                           <attribute name="horizontalHeaderDefaultSectionSize">
-                           <number>200</number>
+                           <number>220</number>
                           </attribute>
                           <attribute name="horizontalHeaderHighlightSections">
                            <bool>true</bool>
@@ -3117,27 +3590,27 @@ QTableWidget::item::selected {
                           </column>
                           <item row="0" column="0">
                            <property name="text">
-                            <string/>
+                            <string>test</string>
                            </property>
                           </item>
                           <item row="0" column="1">
                            <property name="text">
-                            <string/>
+                            <string>sett</string>
                            </property>
                           </item>
                           <item row="0" column="2">
                            <property name="text">
-                            <string/>
+                            <string>set</string>
                            </property>
                           </item>
                           <item row="0" column="3">
                            <property name="text">
-                            <string/>
+                            <string>set</string>
                            </property>
                           </item>
                           <item row="0" column="4">
                            <property name="text">
-                            <string/>
+                            <string>set</string>
                            </property>
                           </item>
                          </widget>
@@ -3189,19 +3662,7 @@ QTableWidget::item::selected {
                         </size>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true">QHeaderView::section {
-	background-color: transparent;
-	color: #718EBF;
-}
-
-QTableWidget::item {
-	border-bottom: 1px solid #E6EFF5;
-}
-
-QTableWidget::item::selected {
-	color: black;
-	background-color: #eeeeee;
-}</string>
+                        <string notr="true"/>
                        </property>
                        <property name="frameShape">
                         <enum>QFrame::StyledPanel</enum>
@@ -3214,10 +3675,10 @@ QTableWidget::item::selected {
                          <number>0</number>
                         </property>
                         <property name="leftMargin">
-                         <number>0</number>
+                         <number>18</number>
                         </property>
                         <property name="rightMargin">
-                         <number>0</number>
+                         <number>18</number>
                         </property>
                         <item>
                          <widget class="QTableWidget" name="history_registry_table">
@@ -3320,6 +3781,46 @@ QTableWidget::item::selected {
                             <string>결과</string>
                            </property>
                           </column>
+                          <item row="0" column="0">
+                           <property name="text">
+                            <string>test</string>
+                           </property>
+                          </item>
+                          <item row="0" column="1">
+                           <property name="text">
+                            <string>set</string>
+                           </property>
+                          </item>
+                          <item row="0" column="2">
+                           <property name="text">
+                            <string>set</string>
+                           </property>
+                          </item>
+                          <item row="0" column="3">
+                           <property name="text">
+                            <string>setsets</string>
+                           </property>
+                          </item>
+                          <item row="1" column="0">
+                           <property name="text">
+                            <string>test</string>
+                           </property>
+                          </item>
+                          <item row="1" column="1">
+                           <property name="text">
+                            <string>set</string>
+                           </property>
+                          </item>
+                          <item row="1" column="2">
+                           <property name="text">
+                            <string>set</string>
+                           </property>
+                          </item>
+                          <item row="1" column="3">
+                           <property name="text">
+                            <string>set</string>
+                           </property>
+                          </item>
                          </widget>
                         </item>
                        </layout>
@@ -3370,7 +3871,7 @@ QTableWidget::item::selected {
               <item>
                <widget class="QStackedWidget" name="network_stackedWidget">
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="network_process_page">
                  <layout class="QVBoxLayout" name="verticalLayout_29">
@@ -3558,19 +4059,7 @@ QFrame#network_table_frame {
                         </size>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true">QHeaderView::section {
-	background-color: transparent;
-	color: #718EBF;
-}
-
-QTableWidget::item {
-	border-bottom: 1px solid #E6EFF5;
-}
-
-QTableWidget::item::selected {
-	color: black;
-	background-color: #eeeeee;
-}</string>
+                        <string notr="true"/>
                        </property>
                        <property name="frameShape">
                         <enum>QFrame::StyledPanel</enum>
@@ -3579,6 +4068,12 @@ QTableWidget::item::selected {
                         <enum>QFrame::Raised</enum>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_36">
+                        <property name="leftMargin">
+                         <number>18</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>18</number>
+                        </property>
                         <item>
                          <widget class="QTableWidget" name="network_table">
                           <property name="horizontalScrollBarPolicy">
@@ -3870,6 +4365,12 @@ QPushButton#btn_network_analyze::hover {
                      <enum>QFrame::Raised</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_22">
+                     <property name="leftMargin">
+                      <number>18</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>18</number>
+                     </property>
                      <item>
                       <widget class="QTabWidget" name="network_tab">
                        <property name="styleSheet">
@@ -3939,15 +4440,7 @@ QLabel#content, QLabel#content_2, QLabel#content_3, QLabel#content_4, QLabel#con
 QHeaderView::section {
 	background-color: transparent;
 	color: #718EBF;
-}
-
-QTableWidget::item {
-	border-bottom: 1px solid #E6EFF5;
-}
-
-QTableWidget::item::selected {
-	color: black;
-	background-color: #eeeeee;
+	padding: 5px;
 }</string>
                         </property>
                         <attribute name="title">
@@ -3993,13 +4486,13 @@ QTableWidget::item::selected {
                             <bool>true</bool>
                            </property>
                            <property name="rowCount">
-                            <number>12</number>
+                            <number>22</number>
                            </property>
                            <attribute name="horizontalHeaderVisible">
                             <bool>false</bool>
                            </attribute>
                            <attribute name="horizontalHeaderDefaultSectionSize">
-                            <number>180</number>
+                            <number>175</number>
                            </attribute>
                            <attribute name="horizontalHeaderHighlightSections">
                             <bool>true</bool>
@@ -4022,6 +4515,16 @@ QTableWidget::item::selected {
                            <attribute name="verticalHeaderStretchLastSection">
                             <bool>false</bool>
                            </attribute>
+                           <row/>
+                           <row/>
+                           <row/>
+                           <row/>
+                           <row/>
+                           <row/>
+                           <row/>
+                           <row/>
+                           <row/>
+                           <row/>
                            <row/>
                            <row/>
                            <row/>
@@ -4410,7 +4913,7 @@ QLabel {
                   <number>5</number>
                  </property>
                  <property name="bottomMargin">
-                  <number>18</number>
+                  <number>30</number>
                  </property>
                  <item>
                   <widget class="QFrame" name="prev_btn_group">
@@ -4422,12 +4925,15 @@ QLabel {
                    </property>
                    <property name="styleSheet">
                     <string notr="true">* {
+	font-size: 16px;
 	background-color: transparent;
+	text-align: left;
 }
 
 QPushButton {
 	background-color: #FFFFFF;
 	border-radius: 25px;
+	padding-left: 20px;
 }
 
 QPushButton::hover {
@@ -4455,13 +4961,23 @@ QPushButton::checked {
                      <widget class="QPushButton" name="btn_prev_process_2">
                       <property name="maximumSize">
                        <size>
-                        <width>230</width>
+                        <width>250</width>
                         <height>100</height>
                        </size>
                       </property>
                       <property name="text">
-                       <string>프로세스 정보
-process info</string>
+                       <string>   프로세스 정보
+   process info</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="../resources/resources.qrc">
+                        <normaloff>:/Icons/images/search_1.png</normaloff>:/Icons/images/search_1.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>60</width>
+                        <height>60</height>
+                       </size>
                       </property>
                       <property name="checkable">
                        <bool>true</bool>
@@ -4475,13 +4991,23 @@ process info</string>
                      <widget class="QPushButton" name="btn_prev_history_2">
                       <property name="maximumSize">
                        <size>
-                        <width>230</width>
+                        <width>250</width>
                         <height>100</height>
                        </size>
                       </property>
                       <property name="text">
-                       <string>히스토리 추적
-History tracking</string>
+                       <string>   히스토리 추적
+   History tracking</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="../resources/resources.qrc">
+                        <normaloff>:/Icons/images/eye_1.png</normaloff>:/Icons/images/eye_1.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>60</width>
+                        <height>60</height>
+                       </size>
                       </property>
                       <property name="checkable">
                        <bool>true</bool>
@@ -4495,13 +5021,23 @@ History tracking</string>
                      <widget class="QPushButton" name="btn_prev_network_2">
                       <property name="maximumSize">
                        <size>
-                        <width>230</width>
+                        <width>250</width>
                         <height>100</height>
                        </size>
                       </property>
                       <property name="text">
-                       <string>네트워크 모니터링
-Network monitoring</string>
+                       <string>  네트워크 모니터링
+  Network monitoring</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="../resources/resources.qrc">
+                        <normaloff>:/Icons/images/earth_1.png</normaloff>:/Icons/images/earth_1.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>60</width>
+                        <height>60</height>
+                       </size>
                       </property>
                       <property name="checkable">
                        <bool>true</bool>
@@ -4600,7 +5136,14 @@ QFrame#prev_table_frame {
                    </property>
                    <widget class="QWidget" name="prev_process_page">
                     <property name="styleSheet">
-                     <string notr="true"/>
+                     <string notr="true">QFrame#prev_table_frame_1 {
+	border-radius: 25px;
+	margin: 0px 10px 0px 10px;
+}
+
+#prev_table_frame_2 {
+	background-color: transparent;
+}</string>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_22">
                      <property name="spacing">
@@ -4627,7 +5170,10 @@ QFrame#prev_table_frame {
                         </sizepolicy>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true"/>
+                        <string notr="true">#prev_table {
+	background-color: transparent;
+	margin-top: 5px;
+}</string>
                        </property>
                        <property name="frameShape">
                         <enum>QFrame::StyledPanel</enum>
@@ -4640,13 +5186,13 @@ QFrame#prev_table_frame {
                          <number>0</number>
                         </property>
                         <property name="leftMargin">
-                         <number>9</number>
+                         <number>18</number>
                         </property>
                         <property name="topMargin">
                          <number>0</number>
                         </property>
                         <property name="rightMargin">
-                         <number>9</number>
+                         <number>18</number>
                         </property>
                         <property name="bottomMargin">
                          <number>0</number>
@@ -4654,19 +5200,7 @@ QFrame#prev_table_frame {
                         <item>
                          <widget class="QFrame" name="prev_table_frame_2">
                           <property name="styleSheet">
-                           <string notr="true">QHeaderView::section {
-	background-color: transparent;
-	color: #718EBF;
-}
-
-QTableWidget::item {
-	border-bottom: 1px solid #E6EFF5;
-}
-
-QTableWidget::item::selected {
-	color: black;
-	background-color: #eeeeee;
-}</string>
+                           <string notr="true"/>
                           </property>
                           <property name="frameShape">
                            <enum>QFrame::StyledPanel</enum>
@@ -4714,7 +5248,7 @@ QTableWidget::item::selected {
                               <bool>true</bool>
                              </property>
                              <property name="rowCount">
-                              <number>10</number>
+                              <number>22</number>
                              </property>
                              <attribute name="horizontalHeaderVisible">
                               <bool>false</bool>
@@ -4723,7 +5257,7 @@ QTableWidget::item::selected {
                               <bool>false</bool>
                              </attribute>
                              <attribute name="horizontalHeaderDefaultSectionSize">
-                              <number>270</number>
+                              <number>264</number>
                              </attribute>
                              <attribute name="horizontalHeaderHighlightSections">
                               <bool>true</bool>
@@ -4765,6 +5299,18 @@ QTableWidget::item::selected {
                              <row/>
                              <row/>
                              <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
+                             <row/>
                              <column>
                               <property name="text">
                                <string>No.</string>
@@ -4786,6 +5332,51 @@ QTableWidget::item::selected {
                               </property>
                              </column>
                              <item row="0" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="1" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="2" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="3" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="4" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="5" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="6" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="7" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="8" column="0">
+                              <property name="text">
+                               <string/>
+                              </property>
+                             </item>
+                             <item row="9" column="0">
                               <property name="text">
                                <string/>
                               </property>
@@ -4814,6 +5405,75 @@ QTableWidget::item::selected {
                      </item>
                     </layout>
                    </widget>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="btn_past_frame">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>33</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">#btn_past_frame {
+	background-color: transparent;
+}
+
+#btn_past {
+	font-size: 18px;
+	padding: 5px;
+	background-color: white;
+	border-radius: 15px;
+	border: 1px solid #1814F3;
+	color: #1814F3;
+}
+
+#btn_past::hover {
+	font-size: 18px;
+	padding: 5px;
+	background-color: #1814F3;
+	border-radius: 15px;
+	border: 1px solid #white;
+	color: white;
+}</string>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_19">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QPushButton" name="btn_past">
+                      <property name="maximumSize">
+                       <size>
+                        <width>170</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>이전 분석 결과 확인</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                 </layout>
@@ -5385,7 +6045,7 @@ Operation은 RegSetValue, RegDeleteValue등으로 구분됩니다</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

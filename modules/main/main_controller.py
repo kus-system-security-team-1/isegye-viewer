@@ -1,4 +1,6 @@
 from modules.main.main_service import MainService
+from modules.main.main_view import PrevHistoryWindow, AlertWindow
+from PyQt5.QtCore import Qt
 
 
 class MainController:
@@ -24,6 +26,8 @@ class MainController:
                 self.view.history_stackedWidget.setCurrentIndex(0)
             elif index == 2:
                 self.view.network_stackedWidget.setCurrentIndex(0)
+            elif index == 3:
+                self.view.btn_past.setVisible(False)
 
             self.view.page_stackedWidget.setCurrentIndex(index)
 
@@ -43,6 +47,7 @@ class MainController:
                 self.view.prev_stackedWidget.setCurrentIndex(1)
             else:
                 self.view.prev_stackedWidget.setCurrentIndex(0)
+                self.view.btn_past.setVisible(True)
             page_title = page.get(index, " ")
             self.view.prev_page_title.setText(page_title)
 
@@ -54,3 +59,35 @@ class MainController:
 
     def network_monitoring(self):
         self.view.network_stackedWidget.setCurrentIndex(1)
+
+    def show_past_history(self):
+        current_page = self.view.prev_page_title.text()
+        if self.view.prevHistory_popup is None:
+            self.view.prevHistory_popup = PrevHistoryWindow(parent=self.view)
+            self.view.prevHistory_popup.setWindowModality(Qt.ApplicationModal)
+
+        if current_page == "프로세스 정보":
+            self.view.prevHistory_popup.prevHistory_stackedWidget.setCurrentIndex(
+                0
+            )
+        elif current_page == "히스토리 추적":
+            self.view.prevHistory_popup.prevHistory_stackedWidget.setCurrentIndex(
+                1
+            )
+        elif current_page == "네트워크 모니터링":
+            self.view.prevHistory_popup.prevHistory_stackedWidget.setCurrentIndex(
+                2
+            )
+        else:
+            return
+
+        self.view.prevHistory_popup.show()
+
+    def show_alert(self):
+        if self.view.alert_popup is None:
+            self.view.alert_popup = AlertWindow(parent=self.view)
+        self.view.alert_popup.exec()
+        self.view.alert_popup = None
+
+    def reset_prevHistory_popup(self):
+        self.view.prevHistory_popup = None

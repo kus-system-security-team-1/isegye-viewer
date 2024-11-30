@@ -1,7 +1,7 @@
 <RCC>
   <qresource prefix="logo">
     <file>images/favicon.png</file>
-    <file>images/logo.jfif</file>
+    <file>images/logo.png</file>
   </qresource>
   <qresource prefix="Icons">
     <file>images/Alert circle.png</file>

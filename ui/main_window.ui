@@ -245,7 +245,7 @@ QTableWidget::item::selected {
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="../resources/resources.qrc">:/logo/images/logo.jfif</pixmap>
+             <pixmap resource="../resources/resources.qrc">:/logo/images/logo.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -824,7 +824,7 @@ QFrame {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>3</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="page_process_info_menu">
              <property name="sizePolicy">
@@ -6040,7 +6040,7 @@ Operation은 RegSetValue, RegDeleteValue등으로 구분됩니다</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

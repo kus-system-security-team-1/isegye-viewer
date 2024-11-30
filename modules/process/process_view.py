@@ -1,4 +1,4 @@
-class ProcessWindow():
+class ProcessWindow:
     def __init__(self):
         super().__init__()
         self.controller = None
@@ -11,6 +11,8 @@ class ProcessWindow():
 
     def init_ui(self):
         if self.app_module:
-            self.controller = self.app_module.get_controller("ProcessController")
+            self.controller = self.app_module.get_controller(
+                "ProcessController"
+            )
         if not self.controller:
             return

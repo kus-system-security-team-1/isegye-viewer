@@ -21,19 +21,21 @@ def test_show_network_packets():
             type=socket.SOCK_STREAM,
             laddr=MagicMock(ip="127.0.0.1", port=8080),
             raddr=MagicMock(ip="192.168.1.1", port=80),
-            status="ESTABLISHED"
+            status="ESTABLISHED",
         ),
         MagicMock(
             pid=5678,
             type=socket.SOCK_DGRAM,
             laddr=MagicMock(ip="127.0.0.1", port=53),
             raddr=None,
-            status="LISTEN"
+            status="LISTEN",
         ),
     ]
 
-    with patch("psutil.net_connections", return_value=mock_connections), \
-         patch("psutil.Process") as MockProcess:
+    with (
+        patch("psutil.net_connections", return_value=mock_connections),
+        patch("psutil.Process") as MockProcess,
+    ):
 
         MockProcess.return_value.name.return_value = "mock_process"
 

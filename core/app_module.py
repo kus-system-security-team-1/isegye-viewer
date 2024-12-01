@@ -1,10 +1,20 @@
 import os
 import importlib
+import lib.isegye_viewer_core as isegye_viewer_core
 
 
 class AppModule:
     def __init__(self):
         self.controllers = {}
+        self.lib = {}
+        for class_name in dir(isegye_viewer_core):
+            if "__" not in class_name:
+                cls = getattr(isegye_viewer_core, class_name)
+                if isinstance(cls, type):
+                    try:
+                        self.lib[class_name] = cls()
+                    except Exception as e:
+                        print(f"Failed to initialize {class_name}: {e}")
 
     def init_modules(self, main_window=None):
         self._load_modules("modules.main", "Controller", main_window)
@@ -24,7 +34,7 @@ class AppModule:
                     if attribute_name.endswith(class_suffix):
                         controller_class = getattr(module, attribute_name)
                         instance = controller_class(
-                            config={}, view=main_window
+                            config={"lib": self.lib}, view=main_window
                         )
                         self.controllers[attribute_name] = instance
 

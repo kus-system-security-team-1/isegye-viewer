@@ -7,3 +7,10 @@ class ProcesssController:
         self.view = ProcessWindow()
         self.config = config
         self.service = ProcessService(config)
+
+    # def show_network_io(self):
+    #     todo: get pid from other service
+    #     data = self.service.show_network_io(pid)
+
+    def show_network_packets(self):
+        data = self.service.show_network_packets()

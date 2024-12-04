@@ -14,6 +14,16 @@ class ProcessService:
         elif type == socket.SOCK_RAW:
             return "RAW"
         return "UNKNOWN"
+    
+    def show_network_io(self, pid):
+        process = psutil.Process(pid)
+        io_counters = process.io_counters()
+        return {
+            "read_count": io_counters.read_count,
+            "write_count": io_counters.write_count,
+            "read_bytes": io_counters.read_bytes,
+            "write_bytes": io_counters.write_bytes,
+        }
 
     def show_network_packets(self):
         connections = psutil.net_connections()

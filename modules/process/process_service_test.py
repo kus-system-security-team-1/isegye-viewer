@@ -2,7 +2,9 @@ import socket
 from unittest.mock import patch, MagicMock
 from modules.process.process_service import ProcessService
 
-config = {}
+config = {
+    "lib": {"BasicProcInfo": MagicMock()},
+}
 
 
 def test_get_protocol_name():
@@ -12,6 +14,30 @@ def test_get_protocol_name():
     assert service._get_protocol_name(socket.SOCK_DGRAM) == "UDP"
     assert service._get_protocol_name(socket.SOCK_RAW) == "RAW"
     assert service._get_protocol_name(1234) == "UNKNOWN"
+
+
+def test_show_network_io():
+    mock_io_counters = MagicMock(
+        read_count=1,
+        write_count=2,
+        read_bytes=3,
+        write_bytes=4,
+    )
+
+    with patch("psutil.Process") as MockProcess:
+        MockProcess.return_value.io_counters.return_value = mock_io_counters
+
+        service = ProcessService(config)
+        result = service.show_network_io(1234)
+
+        expected_result = {
+            "read_count": 1,
+            "write_count": 2,
+            "read_bytes": 3,
+            "write_bytes": 4,
+        }
+
+        assert result == expected_result
 
 
 def test_show_network_packets():

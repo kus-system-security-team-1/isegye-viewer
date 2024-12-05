@@ -11,11 +11,11 @@ class MainController:
         self.service = MainService(config)
 
         self.history_controller = self.app_module.get_controller(
-            'HistoryController'
+            "HistoryController"
         )
-        self.pe_controller = self.app_module.get_controller('PEController')
+        self.pe_controller = self.app_module.get_controller("PEController")
         self.process_controller = self.app_module.get_controller(
-            'ProcesssController'
+            "ProcesssController"
         )
 
     def switch_page(self, index):  # 상위 메뉴 페이지 전환
@@ -99,8 +99,11 @@ class MainController:
         self.view.alert_popup = None
 
     def test(self):
-        test = self.get_all_processes.show_network_packets()
-        print(test)
+        print(self.process_controller)
+        if self.process_controller:
+            test = self.process_controller.get_all_processes()
+            print(test)
+        
 
     def reset_prevHistory_popup(self):
         self.view.prevHistory_popup = None

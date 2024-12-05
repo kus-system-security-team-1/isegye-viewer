@@ -14,8 +14,7 @@ def main():
     app_module = AppModule()
     app_module.init_modules(main_window=window)
 
-    controller = MainController(config={}, view=window, app_module=app_module)
-    window.controller = controller
+    window.controller = app_module.get_controller("MainController")
 
     window.set_app_module(app_module)
     window.setWindowTitle("Isegye Viewer")

@@ -122,10 +122,10 @@ class MainWindow(QMainWindow, BaseWindow):
         self.btn_test.clicked.connect(self.controller.show_alert)
 
 
-class PrevHistoryWindow(QWidget):
+class PrevHistoryWindow(QWidget, BaseWindow):
     def __init__(self, parent=None):
-        super().__init__(parent)
-        uic.loadUi("ui/prevHistory_window.ui", self)
+        QWidget.__init__(self)
+        BaseWindow.__init__(self, "ui/prevHistory_window.ui")
         self.prevHistory_registry_table.horizontalHeader().show()
         self.prevHistory_ss_log_table.horizontalHeader().show()
         self.prev_process_basic_info_table.horizontalHeader().show()
@@ -154,7 +154,6 @@ class PrevHistoryWindow(QWidget):
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.prevHistory_stackedWidget.setCurrentIndex(0)
-        self.init_ui()
         self.move(170, 137)
 
     def init_ui(self):
@@ -166,15 +165,14 @@ class PrevHistoryWindow(QWidget):
         event.accept()
 
 
-class AlertWindow(QDialog):
+class AlertWindow(QDialog, BaseWindow):
     def __init__(self, parent=None):
-        super().__init__(parent)
-        uic.loadUi("ui/alert_window.ui", self)
+        QDialog.__init__(self)
+        BaseWindow.__init__(self, "ui/alert_window.ui")
         self.controller = None
         self.alert_stackedWidget.setCurrentIndex(0)
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.init_ui()
 
     def init_ui(self):
         self.btn_ok_1.clicked.connect(self.accept)

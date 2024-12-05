@@ -20,6 +20,7 @@ class AppModule:
         self._load_modules("modules.main", "Controller", main_window)
         self._load_modules("modules.process", "Controller", main_window)
         self._load_modules("modules.history", "Controller", main_window)
+        self._load_modules("modules.pe", "Controller", main_window)
 
     def _load_modules(self, package_path, class_suffix, main_window=None):
         package = importlib.import_module(package_path)

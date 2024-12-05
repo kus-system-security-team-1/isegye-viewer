@@ -1,13 +1,14 @@
 from PyQt5 import uic, QtCore
 from PyQt5.QtWidgets import QMainWindow, QWidget, QDesktopWidget, QDialog
 from PyQt5.QtCore import Qt
+from common.base_window import BaseWindow
 import resources.resources_rc  # noqa
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, BaseWindow):
     def __init__(self):
-        super().__init__()
-        uic.loadUi("ui/main_window.ui", self)
+        QMainWindow.__init__(self)
+        BaseWindow.__init__(self, "ui/main_window.ui")
         self.controller = None
         self.app_module = None
 
@@ -51,7 +52,6 @@ class MainWindow(QMainWindow):
         self.prev_menu_group.setVisible(False)
         self.btn_past.setVisible(False)
         self.btn_process_menu.setChecked(True)
-        self.init_ui()
         self.center()
 
     def center(self):  # 모니터 정중앙에 화면 띄우기
@@ -60,15 +60,8 @@ class MainWindow(QMainWindow):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-    def set_app_module(self, app_module):
-        self.app_module = app_module
-        self.init_ui()
-
     def init_ui(self):
-        if self.app_module:
-            self.controller = self.app_module.get_controller("MainController")
-        if not self.controller:
-            return
+        super().init_ui("MainController")
 
         self.btn_process_menu.clicked.connect(
             lambda: self.controller.switch_page(0)

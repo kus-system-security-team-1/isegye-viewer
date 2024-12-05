@@ -1,4 +1,4 @@
-from PyQt5 import uic, QtCore
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMainWindow, QWidget, QDesktopWidget, QDialog
 from PyQt5.QtCore import Qt
 from common.base_window import BaseWindow

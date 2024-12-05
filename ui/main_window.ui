@@ -154,6 +154,20 @@ QTableWidget::item {
 QTableWidget::item::selected {
 	color: black;
 	background-color: #eeeeee;
+}
+
+QHeaderView::section {
+	background-color: transparent;
+	color: #718EBF;
+}
+
+QTableView::item {
+	border-bottom: 1px solid #E6EFF5;
+}
+
+QTableView::item::selected {
+	color: black;
+	background-color: #eeeeee;
 }</string>
   </property>
   <property name="toolButtonStyle">
@@ -598,7 +612,7 @@ QPushButton:checked {
              <item>
               <widget class="QPushButton" name="btn_test">
                <property name="text">
-                <string>alert 확인용(추후 삭제)</string>
+                <string>PushButton</string>
                </property>
               </widget>
              </item>
@@ -824,7 +838,7 @@ QFrame {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="page_process_info_menu">
              <property name="sizePolicy">
@@ -3089,13 +3103,7 @@ QFrame#history_table_frame {
                          <number>18</number>
                         </property>
                         <item>
-                         <widget class="QTableWidget" name="history_table">
-                          <property name="horizontalScrollBarPolicy">
-                           <enum>Qt::ScrollBarAlwaysOff</enum>
-                          </property>
-                          <property name="autoScrollMargin">
-                           <number>15</number>
-                          </property>
+                         <widget class="QTableView" name="history_table">
                           <property name="editTriggers">
                            <set>QAbstractItemView::NoEditTriggers</set>
                           </property>
@@ -3115,28 +3123,13 @@ QFrame#history_table_frame {
                            <enum>QAbstractItemView::SelectRows</enum>
                           </property>
                           <property name="showGrid">
-                           <bool>true</bool>
+                           <bool>false</bool>
                           </property>
                           <property name="gridStyle">
                            <enum>Qt::NoPen</enum>
                           </property>
-                          <property name="wordWrap">
-                           <bool>true</bool>
-                          </property>
-                          <property name="cornerButtonEnabled">
-                           <bool>true</bool>
-                          </property>
-                          <property name="rowCount">
-                           <number>22</number>
-                          </property>
-                          <attribute name="horizontalHeaderVisible">
-                           <bool>false</bool>
-                          </attribute>
                           <attribute name="horizontalHeaderDefaultSectionSize">
                            <number>180</number>
-                          </attribute>
-                          <attribute name="horizontalHeaderHighlightSections">
-                           <bool>true</bool>
                           </attribute>
                           <attribute name="horizontalHeaderMinimumSectionSize">
                            <number>40</number>
@@ -3144,123 +3137,6 @@ QFrame#history_table_frame {
                           <attribute name="verticalHeaderVisible">
                            <bool>false</bool>
                           </attribute>
-                          <attribute name="verticalHeaderDefaultSectionSize">
-                           <number>50</number>
-                          </attribute>
-                          <attribute name="verticalHeaderHighlightSections">
-                           <bool>false</bool>
-                          </attribute>
-                          <attribute name="verticalHeaderMinimumSectionSize">
-                           <number>30</number>
-                          </attribute>
-                          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-                           <bool>false</bool>
-                          </attribute>
-                          <attribute name="verticalHeaderStretchLastSection">
-                           <bool>false</bool>
-                          </attribute>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <column>
-                           <property name="text">
-                            <string>시간</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>출발지</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>도착지</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>프로토콜</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>상태</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>패킷 크기</string>
-                           </property>
-                          </column>
-                          <item row="0" column="0">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="1">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="2">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="3">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="4">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="5">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="1" column="0">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="2" column="0">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="2" column="1">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="2" column="2">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
                          </widget>
                         </item>
                        </layout>
@@ -3681,12 +3557,9 @@ QFrame {
                          <number>18</number>
                         </property>
                         <item>
-                         <widget class="QTableWidget" name="history_registry_table">
+                         <widget class="QTableView" name="history_registry_table">
                           <property name="horizontalScrollBarPolicy">
                            <enum>Qt::ScrollBarAlwaysOff</enum>
-                          </property>
-                          <property name="autoScrollMargin">
-                           <number>30</number>
                           </property>
                           <property name="editTriggers">
                            <set>QAbstractItemView::NoEditTriggers</set>
@@ -3706,121 +3579,15 @@ QFrame {
                           <property name="selectionBehavior">
                            <enum>QAbstractItemView::SelectRows</enum>
                           </property>
-                          <property name="showGrid">
-                           <bool>true</bool>
-                          </property>
                           <property name="gridStyle">
                            <enum>Qt::NoPen</enum>
                           </property>
-                          <property name="wordWrap">
-                           <bool>true</bool>
-                          </property>
-                          <property name="cornerButtonEnabled">
-                           <bool>true</bool>
-                          </property>
-                          <property name="rowCount">
-                           <number>10</number>
-                          </property>
-                          <attribute name="horizontalHeaderVisible">
-                           <bool>false</bool>
-                          </attribute>
-                          <attribute name="horizontalHeaderCascadingSectionResizes">
-                           <bool>false</bool>
-                          </attribute>
                           <attribute name="horizontalHeaderDefaultSectionSize">
                            <number>268</number>
-                          </attribute>
-                          <attribute name="horizontalHeaderHighlightSections">
-                           <bool>true</bool>
                           </attribute>
                           <attribute name="verticalHeaderVisible">
                            <bool>false</bool>
                           </attribute>
-                          <attribute name="verticalHeaderDefaultSectionSize">
-                           <number>50</number>
-                          </attribute>
-                          <attribute name="verticalHeaderHighlightSections">
-                           <bool>false</bool>
-                          </attribute>
-                          <attribute name="verticalHeaderMinimumSectionSize">
-                           <number>30</number>
-                          </attribute>
-                          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-                           <bool>false</bool>
-                          </attribute>
-                          <attribute name="verticalHeaderStretchLastSection">
-                           <bool>false</bool>
-                          </attribute>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <column>
-                           <property name="text">
-                            <string>시간</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>수행동작</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>경로</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>결과</string>
-                           </property>
-                          </column>
-                          <item row="0" column="0">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="1">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="2">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="3">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="1" column="0">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="1" column="1">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="1" column="2">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="1" column="3">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
                          </widget>
                         </item>
                        </layout>
@@ -4075,12 +3842,9 @@ QFrame#network_table_frame {
                          <number>18</number>
                         </property>
                         <item>
-                         <widget class="QTableWidget" name="network_table">
+                         <widget class="QTableView" name="network_table">
                           <property name="horizontalScrollBarPolicy">
-                           <enum>Qt::ScrollBarAlwaysOff</enum>
-                          </property>
-                          <property name="autoScrollMargin">
-                           <number>15</number>
+                           <enum>Qt::ScrollBarAlwaysOn</enum>
                           </property>
                           <property name="editTriggers">
                            <set>QAbstractItemView::NoEditTriggers</set>
@@ -4101,7 +3865,7 @@ QFrame#network_table_frame {
                            <enum>QAbstractItemView::SelectRows</enum>
                           </property>
                           <property name="showGrid">
-                           <bool>true</bool>
+                           <bool>false</bool>
                           </property>
                           <property name="gridStyle">
                            <enum>Qt::NoPen</enum>
@@ -4112,17 +3876,8 @@ QFrame#network_table_frame {
                           <property name="cornerButtonEnabled">
                            <bool>false</bool>
                           </property>
-                          <property name="rowCount">
-                           <number>10</number>
-                          </property>
-                          <attribute name="horizontalHeaderVisible">
-                           <bool>false</bool>
-                          </attribute>
                           <attribute name="horizontalHeaderDefaultSectionSize">
                            <number>183</number>
-                          </attribute>
-                          <attribute name="horizontalHeaderHighlightSections">
-                           <bool>true</bool>
                           </attribute>
                           <attribute name="horizontalHeaderMinimumSectionSize">
                            <number>50</number>
@@ -4130,96 +3885,6 @@ QFrame#network_table_frame {
                           <attribute name="verticalHeaderVisible">
                            <bool>false</bool>
                           </attribute>
-                          <attribute name="verticalHeaderDefaultSectionSize">
-                           <number>50</number>
-                          </attribute>
-                          <attribute name="verticalHeaderHighlightSections">
-                           <bool>false</bool>
-                          </attribute>
-                          <attribute name="verticalHeaderMinimumSectionSize">
-                           <number>30</number>
-                          </attribute>
-                          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-                           <bool>false</bool>
-                          </attribute>
-                          <attribute name="verticalHeaderStretchLastSection">
-                           <bool>false</bool>
-                          </attribute>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <row/>
-                          <column>
-                           <property name="text">
-                            <string>프로세스</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>CPU</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>메모리</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>디스크 I/O</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>네트워크</string>
-                           </property>
-                          </column>
-                          <column>
-                           <property name="text">
-                            <string>사용자 이름</string>
-                           </property>
-                          </column>
-                          <item row="0" column="0">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="1">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="2">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="3">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="4">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="0" column="5">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
-                          <item row="1" column="1">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </item>
                          </widget>
                         </item>
                        </layout>
@@ -4448,12 +4113,9 @@ QHeaderView::section {
                         </attribute>
                         <layout class="QGridLayout" name="gridLayout_13">
                          <item row="0" column="0">
-                          <widget class="QTableWidget" name="network_log_table">
+                          <widget class="QTableView" name="network_log_table">
                            <property name="horizontalScrollBarPolicy">
                             <enum>Qt::ScrollBarAlwaysOff</enum>
-                           </property>
-                           <property name="autoScrollMargin">
-                            <number>15</number>
                            </property>
                            <property name="editTriggers">
                             <set>QAbstractItemView::NoEditTriggers</set>
@@ -4473,150 +4135,15 @@ QHeaderView::section {
                            <property name="selectionBehavior">
                             <enum>QAbstractItemView::SelectRows</enum>
                            </property>
-                           <property name="showGrid">
-                            <bool>true</bool>
-                           </property>
                            <property name="gridStyle">
                             <enum>Qt::NoPen</enum>
                            </property>
-                           <property name="wordWrap">
-                            <bool>true</bool>
-                           </property>
-                           <property name="cornerButtonEnabled">
-                            <bool>true</bool>
-                           </property>
-                           <property name="rowCount">
-                            <number>22</number>
-                           </property>
-                           <attribute name="horizontalHeaderVisible">
-                            <bool>false</bool>
-                           </attribute>
                            <attribute name="horizontalHeaderDefaultSectionSize">
                             <number>175</number>
-                           </attribute>
-                           <attribute name="horizontalHeaderHighlightSections">
-                            <bool>true</bool>
                            </attribute>
                            <attribute name="verticalHeaderVisible">
                             <bool>false</bool>
                            </attribute>
-                           <attribute name="verticalHeaderDefaultSectionSize">
-                            <number>50</number>
-                           </attribute>
-                           <attribute name="verticalHeaderHighlightSections">
-                            <bool>false</bool>
-                           </attribute>
-                           <attribute name="verticalHeaderMinimumSectionSize">
-                            <number>30</number>
-                           </attribute>
-                           <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-                            <bool>false</bool>
-                           </attribute>
-                           <attribute name="verticalHeaderStretchLastSection">
-                            <bool>false</bool>
-                           </attribute>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <row/>
-                           <column>
-                            <property name="text">
-                             <string>시간</string>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>출발지</string>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>도착지</string>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>프로토콜</string>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>상태</string>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>패킷 크기</string>
-                            </property>
-                           </column>
-                           <item row="0" column="0">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item row="0" column="1">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item row="0" column="2">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item row="0" column="3">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item row="0" column="4">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item row="1" column="0">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item row="1" column="1">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item row="2" column="0">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item row="2" column="1">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item row="3" column="0">
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
                           </widget>
                          </item>
                         </layout>
@@ -5210,12 +4737,9 @@ QFrame#prev_table_frame {
                           </property>
                           <layout class="QHBoxLayout" name="horizontalLayout_27">
                            <item>
-                            <widget class="QTableWidget" name="prev_table">
+                            <widget class="QTableView" name="prev_table">
                              <property name="horizontalScrollBarPolicy">
                               <enum>Qt::ScrollBarAlwaysOff</enum>
-                             </property>
-                             <property name="autoScrollMargin">
-                              <number>15</number>
                              </property>
                              <property name="editTriggers">
                               <set>QAbstractItemView::NoEditTriggers</set>
@@ -5235,147 +4759,15 @@ QFrame#prev_table_frame {
                              <property name="selectionBehavior">
                               <enum>QAbstractItemView::SelectRows</enum>
                              </property>
-                             <property name="showGrid">
-                              <bool>true</bool>
-                             </property>
                              <property name="gridStyle">
                               <enum>Qt::NoPen</enum>
                              </property>
-                             <property name="wordWrap">
-                              <bool>true</bool>
-                             </property>
-                             <property name="cornerButtonEnabled">
-                              <bool>true</bool>
-                             </property>
-                             <property name="rowCount">
-                              <number>22</number>
-                             </property>
-                             <attribute name="horizontalHeaderVisible">
-                              <bool>false</bool>
-                             </attribute>
-                             <attribute name="horizontalHeaderCascadingSectionResizes">
-                              <bool>false</bool>
-                             </attribute>
                              <attribute name="horizontalHeaderDefaultSectionSize">
                               <number>348</number>
-                             </attribute>
-                             <attribute name="horizontalHeaderHighlightSections">
-                              <bool>true</bool>
-                             </attribute>
-                             <attribute name="horizontalHeaderMinimumSectionSize">
-                              <number>32</number>
-                             </attribute>
-                             <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-                              <bool>false</bool>
-                             </attribute>
-                             <attribute name="horizontalHeaderStretchLastSection">
-                              <bool>false</bool>
                              </attribute>
                              <attribute name="verticalHeaderVisible">
                               <bool>false</bool>
                              </attribute>
-                             <attribute name="verticalHeaderDefaultSectionSize">
-                              <number>50</number>
-                             </attribute>
-                             <attribute name="verticalHeaderHighlightSections">
-                              <bool>false</bool>
-                             </attribute>
-                             <attribute name="verticalHeaderMinimumSectionSize">
-                              <number>30</number>
-                             </attribute>
-                             <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-                              <bool>false</bool>
-                             </attribute>
-                             <attribute name="verticalHeaderStretchLastSection">
-                              <bool>false</bool>
-                             </attribute>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <column>
-                              <property name="text">
-                               <string>No.</string>
-                              </property>
-                             </column>
-                             <column>
-                              <property name="text">
-                               <string>이름</string>
-                              </property>
-                             </column>
-                             <column>
-                              <property name="text">
-                               <string>날짜</string>
-                              </property>
-                             </column>
-                             <item row="0" column="0">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="1" column="0">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="2" column="0">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="3" column="0">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="4" column="0">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="5" column="0">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="6" column="0">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="7" column="0">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="8" column="0">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="9" column="0">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
                             </widget>
                            </item>
                           </layout>
@@ -6040,7 +5432,7 @@ Operation은 RegSetValue, RegDeleteValue등으로 구분됩니다</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

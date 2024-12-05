@@ -4,10 +4,19 @@ from PyQt5.QtCore import Qt
 
 
 class MainController:
-    def __init__(self, config, view=None):
+    def __init__(self, config, view=None, app_module=None):
         self.view = view
         self.config = config
+        self.app_module = app_module
         self.service = MainService(config)
+
+        self.history_controller = self.app_module.get_controller(
+            'HistoryController'
+        )
+        self.pe_controller = self.app_module.get_controller('PEController')
+        self.process_controller = self.app_module.get_controller(
+            'ProcesssController'
+        )
 
     def switch_page(self, index):  # 상위 메뉴 페이지 전환
         page = {
@@ -88,6 +97,10 @@ class MainController:
             self.view.alert_popup = AlertWindow(parent=self.view)
         self.view.alert_popup.exec()
         self.view.alert_popup = None
+
+    def test(self):
+        test = self.get_all_processes.show_network_packets()
+        print(test)
 
     def reset_prevHistory_popup(self):
         self.view.prevHistory_popup = None

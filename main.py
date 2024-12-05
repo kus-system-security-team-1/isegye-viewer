@@ -14,7 +14,7 @@ def main():
     app_module = AppModule()
     app_module.init_modules(main_window=window)
 
-    controller = MainController(config={}, view=window)
+    controller = MainController(config={}, view=window, app_module=app_module)
     window.controller = controller
 
     window.set_app_module(app_module)

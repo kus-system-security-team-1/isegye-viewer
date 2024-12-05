@@ -62,7 +62,6 @@ class MainWindow(QMainWindow, BaseWindow):
 
     def init_ui(self):
         super().init_ui("MainController")
-
         self.btn_process_menu.clicked.connect(
             lambda: self.controller.switch_page(0)
         )
@@ -118,8 +117,7 @@ class MainWindow(QMainWindow, BaseWindow):
         )
 
         self.btn_past.clicked.connect(self.controller.show_past_history)
-
-        self.btn_test.clicked.connect(self.controller.show_alert)
+        self.btn_test.clicked.connect(self.controller.test)
 
 
 class PrevHistoryWindow(QWidget, BaseWindow):
@@ -154,7 +152,14 @@ class PrevHistoryWindow(QWidget, BaseWindow):
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.prevHistory_stackedWidget.setCurrentIndex(0)
-        self.move(170, 137)
+        self.center()
+        self.init_ui()
+
+    def center(self):  # 모니터 정중앙에 화면 띄우기
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
     def init_ui(self):
         self.btn_ok.clicked.connect(self.close)
@@ -173,6 +178,14 @@ class AlertWindow(QDialog, BaseWindow):
         self.alert_stackedWidget.setCurrentIndex(0)
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.center()
+        self.init_ui()
+
+    def center(self):  # 모니터 정중앙에 화면 띄우기
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
     def init_ui(self):
         self.btn_ok_1.clicked.connect(self.accept)

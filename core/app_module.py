@@ -36,7 +36,9 @@ class AppModule:
                     if attribute_name.endswith(class_suffix):
                         controller_class = getattr(module, attribute_name)
                         instance = controller_class(
-                            config={"lib": self.lib}, view=main_window
+                            config={"lib": self.lib},
+                            view=main_window,
+                            app_module=self,
                         )
                         self.controllers[attribute_name] = instance
 

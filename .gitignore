@@ -3,4 +3,4 @@ __pycache__/
 .benchmarks/
 .pytest_cache/
 file_access.log
-lib/isegye_viewer_core.pyd
+lib/*

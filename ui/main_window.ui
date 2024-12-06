@@ -609,13 +609,6 @@ QPushButton:checked {
                </attribute>
               </widget>
              </item>
-             <item>
-              <widget class="QPushButton" name="btn_test">
-               <property name="text">
-                <string>PushButton</string>
-               </property>
-              </widget>
-             </item>
             </layout>
            </widget>
           </item>
@@ -779,6 +772,9 @@ QLabel#page_title {
                  <height>1000</height>
                 </size>
                </property>
+               <property name="styleSheet">
+                <string notr="true">font-size: 14px;</string>
+               </property>
                <layout class="QHBoxLayout" name="horizontalLayout_28">
                 <property name="spacing">
                  <number>0</number>
@@ -795,10 +791,25 @@ QLabel#page_title {
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
-                <item alignment="Qt::AlignBottom">
+                <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
                  <widget class="QLabel" name="selected_process_label">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>200</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string/>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -838,7 +849,7 @@ QFrame {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>3</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="page_process_info_menu">
              <property name="sizePolicy">
@@ -923,7 +934,7 @@ QFrame#process_info_btn_group {
                  <item>
                   <widget class="QStackedWidget" name="process_stackedWidget">
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="search_page">
                     <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -1071,106 +1082,204 @@ QFrame#process_info_btn_group {
                        </property>
                       </spacer>
                      </item>
-                     <item alignment="Qt::AlignHCenter">
-                      <widget class="QFrame" name="fileDropArea">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
+                     <item>
+                      <widget class="QStackedWidget" name="insert_pe_stackedWidget">
+                       <property name="currentIndex">
+                        <number>1</number>
                        </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>700</width>
-                         <height>350</height>
-                        </size>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true"/>
-                       </property>
-                       <property name="frameShape">
-                        <enum>QFrame::StyledPanel</enum>
-                       </property>
-                       <property name="frameShadow">
-                        <enum>QFrame::Raised</enum>
-                       </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_19">
-                        <item>
-                         <spacer name="verticalSpacer_5">
-                          <property name="orientation">
-                           <enum>Qt::Vertical</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0">
-                           <size>
-                            <width>20</width>
-                            <height>40</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="text_2">
-                          <property name="minimumSize">
-                           <size>
-                            <width>682</width>
-                            <height>0</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>16777215</width>
-                            <height>80</height>
-                           </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">color: #343C6A;
+                       <widget class="QWidget" name="fileDropPage">
+                        <layout class="QHBoxLayout" name="horizontalLayout_20">
+                         <item>
+                          <widget class="QFrame" name="fileDropArea">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>700</width>
+                             <height>350</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true"/>
+                           </property>
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Raised</enum>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_19">
+                            <item>
+                             <spacer name="verticalSpacer_5">
+                              <property name="orientation">
+                               <enum>Qt::Vertical</enum>
+                              </property>
+                              <property name="sizeHint" stdset="0">
+                               <size>
+                                <width>20</width>
+                                <height>40</height>
+                               </size>
+                              </property>
+                             </spacer>
+                            </item>
+                            <item>
+                             <widget class="QLabel" name="text_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>682</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777215</width>
+                                <height>80</height>
+                               </size>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true">color: #343C6A;
 background-color: transparent;</string>
-                          </property>
-                          <property name="text">
-                           <string>PE 파일 추가</string>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item alignment="Qt::AlignHCenter">
-                         <widget class="QLabel" name="plus_icon">
-                          <property name="maximumSize">
-                           <size>
-                            <width>80</width>
-                            <height>80</height>
-                           </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: transparent;
+                              </property>
+                              <property name="text">
+                               <string>PE 파일 추가</string>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignCenter</set>
+                              </property>
+                             </widget>
+                            </item>
+                            <item alignment="Qt::AlignHCenter">
+                             <widget class="QLabel" name="plus_icon">
+                              <property name="maximumSize">
+                               <size>
+                                <width>80</width>
+                                <height>80</height>
+                               </size>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true">background-color: transparent;
 </string>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="pixmap">
-                           <pixmap resource="../resources/resources.qrc">:/Icons/images/+.png</pixmap>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <spacer name="verticalSpacer_6">
-                          <property name="orientation">
-                           <enum>Qt::Vertical</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0">
-                           <size>
-                            <width>20</width>
-                            <height>40</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                       </layout>
+                              </property>
+                              <property name="text">
+                               <string/>
+                              </property>
+                              <property name="pixmap">
+                               <pixmap resource="../resources/resources.qrc">:/Icons/images/+.png</pixmap>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignCenter</set>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <spacer name="verticalSpacer_6">
+                              <property name="orientation">
+                               <enum>Qt::Vertical</enum>
+                              </property>
+                              <property name="sizeHint" stdset="0">
+                               <size>
+                                <width>20</width>
+                                <height>40</height>
+                               </size>
+                              </property>
+                             </spacer>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                       <widget class="QWidget" name="showSelectedFilePage">
+                        <property name="styleSheet">
+                         <string notr="true">font-size: 24px;</string>
+                        </property>
+                        <layout class="QGridLayout" name="gridLayout_7">
+                         <item row="0" column="0">
+                          <widget class="QFrame" name="frame">
+                           <property name="maximumSize">
+                            <size>
+                             <width>500</width>
+                             <height>150</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">border-radius: 25px;
+</string>
+                           </property>
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Raised</enum>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_38">
+                            <item>
+                             <widget class="QLabel" name="selected_text">
+                              <property name="styleSheet">
+                               <string notr="true">color: #718EBF;</string>
+                              </property>
+                              <property name="text">
+                               <string>선택된 프로세스</string>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLabel" name="selected_process">
+                              <property name="text">
+                               <string/>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignHCenter|Qt::AlignTop</set>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                       <widget class="QWidget" name="show_processes_page">
+                        <property name="styleSheet">
+                         <string notr="true">border-radius: 25px;</string>
+                        </property>
+                        <layout class="QHBoxLayout" name="horizontalLayout_32">
+                         <item>
+                          <widget class="QTableView" name="show_processes_table">
+                           <property name="maximumSize">
+                            <size>
+                             <width>700</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="horizontalScrollBarPolicy">
+                            <enum>Qt::ScrollBarAlwaysOff</enum>
+                           </property>
+                           <property name="autoScroll">
+                            <bool>false</bool>
+                           </property>
+                           <property name="editTriggers">
+                            <set>QAbstractItemView::DoubleClicked</set>
+                           </property>
+                           <property name="selectionMode">
+                            <enum>QAbstractItemView::SingleSelection</enum>
+                           </property>
+                           <property name="selectionBehavior">
+                            <enum>QAbstractItemView::SelectRows</enum>
+                           </property>
+                           <attribute name="horizontalHeaderDefaultSectionSize">
+                            <number>200</number>
+                           </attribute>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
                       </widget>
                      </item>
                      <item>
@@ -1373,7 +1482,7 @@ QLineEdit {
                            </size>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true"/>
+                           <string notr="true">font-size: 14px;</string>
                           </property>
                           <property name="frameShape">
                            <enum>QFrame::StyledPanel</enum>
@@ -1427,7 +1536,7 @@ QLineEdit {
                               <enum>Qt::ScrollBarAlwaysOff</enum>
                              </property>
                              <property name="autoScroll">
-                              <bool>true</bool>
+                              <bool>false</bool>
                              </property>
                              <property name="autoScrollMargin">
                               <number>15</number>
@@ -1472,7 +1581,7 @@ QLineEdit {
                               <bool>false</bool>
                              </attribute>
                              <attribute name="horizontalHeaderDefaultSectionSize">
-                              <number>200</number>
+                              <number>190</number>
                              </attribute>
                              <attribute name="horizontalHeaderHighlightSections">
                               <bool>true</bool>
@@ -1541,7 +1650,7 @@ QLineEdit {
                            </size>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true"/>
+                           <string notr="true">font-size: 14px;</string>
                           </property>
                           <property name="frameShape">
                            <enum>QFrame::StyledPanel</enum>
@@ -1628,7 +1737,7 @@ QLineEdit {
                               <bool>true</bool>
                              </property>
                              <property name="rowCount">
-                              <number>222</number>
+                              <number>22</number>
                              </property>
                              <attribute name="horizontalHeaderVisible">
                               <bool>false</bool>
@@ -1637,7 +1746,7 @@ QLineEdit {
                               <bool>false</bool>
                              </attribute>
                              <attribute name="horizontalHeaderDefaultSectionSize">
-                              <number>152</number>
+                              <number>450</number>
                              </attribute>
                              <attribute name="horizontalHeaderHighlightSections">
                               <bool>true</bool>
@@ -1682,226 +1791,6 @@ QLineEdit {
                              <row/>
                              <row/>
                              <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <row/>
-                             <column>
-                              <property name="text">
-                               <string>No.</string>
-                              </property>
-                             </column>
-                             <column>
-                              <property name="text">
-                               <string>이름</string>
-                              </property>
-                             </column>
-                             <column>
-                              <property name="text">
-                               <string>No.</string>
-                              </property>
-                             </column>
-                             <column>
-                              <property name="text">
-                               <string>이름</string>
-                              </property>
-                             </column>
                              <column>
                               <property name="text">
                                <string>No.</string>
@@ -1922,52 +1811,12 @@ QLineEdit {
                                <string/>
                               </property>
                              </item>
-                             <item row="0" column="2">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="0" column="3">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="0" column="4">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="0" column="5">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
                              <item row="1" column="0">
                               <property name="text">
                                <string/>
                               </property>
                              </item>
                              <item row="1" column="1">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="1" column="2">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="1" column="3">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="1" column="4">
-                              <property name="text">
-                               <string/>
-                              </property>
-                             </item>
-                             <item row="1" column="5">
                               <property name="text">
                                <string/>
                               </property>
@@ -2357,118 +2206,29 @@ QLineEdit {
                                 </property>
                                 <layout class="QGridLayout" name="gridLayout_4">
                                  <item row="0" column="0">
-                                  <widget class="QTableWidget" name="pe_info_table">
-                                   <property name="sizePolicy">
-                                    <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
-                                     <horstretch>0</horstretch>
-                                     <verstretch>0</verstretch>
-                                    </sizepolicy>
+                                  <widget class="QFrame" name="frame_8">
+                                   <property name="frameShape">
+                                    <enum>QFrame::StyledPanel</enum>
                                    </property>
-                                   <property name="minimumSize">
-                                    <size>
-                                     <width>0</width>
-                                     <height>80</height>
-                                    </size>
+                                   <property name="frameShadow">
+                                    <enum>QFrame::Raised</enum>
                                    </property>
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>16777215</width>
-                                     <height>230</height>
-                                    </size>
-                                   </property>
-                                   <property name="styleSheet">
-                                    <string notr="true">* {
-	background-color: transparent;
-}
-</string>
-                                   </property>
-                                   <property name="horizontalScrollBarPolicy">
-                                    <enum>Qt::ScrollBarAlwaysOff</enum>
-                                   </property>
-                                   <property name="autoScroll">
-                                    <bool>true</bool>
-                                   </property>
-                                   <property name="autoScrollMargin">
-                                    <number>15</number>
-                                   </property>
-                                   <property name="editTriggers">
-                                    <set>QAbstractItemView::NoEditTriggers</set>
-                                   </property>
-                                   <property name="tabKeyNavigation">
-                                    <bool>false</bool>
-                                   </property>
-                                   <property name="showDropIndicator" stdset="0">
-                                    <bool>false</bool>
-                                   </property>
-                                   <property name="dragDropOverwriteMode">
-                                    <bool>false</bool>
-                                   </property>
-                                   <property name="selectionMode">
-                                    <enum>QAbstractItemView::SingleSelection</enum>
-                                   </property>
-                                   <property name="selectionBehavior">
-                                    <enum>QAbstractItemView::SelectRows</enum>
-                                   </property>
-                                   <property name="showGrid">
-                                    <bool>false</bool>
-                                   </property>
-                                   <property name="gridStyle">
-                                    <enum>Qt::NoPen</enum>
-                                   </property>
-                                   <property name="wordWrap">
-                                    <bool>true</bool>
-                                   </property>
-                                   <property name="cornerButtonEnabled">
-                                    <bool>true</bool>
-                                   </property>
-                                   <property name="rowCount">
-                                    <number>3</number>
-                                   </property>
-                                   <attribute name="horizontalHeaderVisible">
-                                    <bool>false</bool>
-                                   </attribute>
-                                   <attribute name="horizontalHeaderCascadingSectionResizes">
-                                    <bool>false</bool>
-                                   </attribute>
-                                   <attribute name="horizontalHeaderDefaultSectionSize">
-                                    <number>70</number>
-                                   </attribute>
-                                   <attribute name="horizontalHeaderHighlightSections">
-                                    <bool>true</bool>
-                                   </attribute>
-                                   <attribute name="verticalHeaderVisible">
-                                    <bool>false</bool>
-                                   </attribute>
-                                   <attribute name="verticalHeaderDefaultSectionSize">
-                                    <number>75</number>
-                                   </attribute>
-                                   <attribute name="verticalHeaderHighlightSections">
-                                    <bool>false</bool>
-                                   </attribute>
-                                   <attribute name="verticalHeaderMinimumSectionSize">
-                                    <number>50</number>
-                                   </attribute>
-                                   <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-                                    <bool>false</bool>
-                                   </attribute>
-                                   <attribute name="verticalHeaderStretchLastSection">
-                                    <bool>false</bool>
-                                   </attribute>
-                                   <row>
-                                    <property name="text">
-                                     <string>엔트로피 값</string>
-                                    </property>
-                                   </row>
-                                   <row>
-                                    <property name="text">
-                                     <string>서명 정보</string>
-                                    </property>
-                                   </row>
-                                   <row>
-                                    <property name="text">
-                                     <string>VT detection</string>
-                                    </property>
-                                   </row>
+                                   <layout class="QHBoxLayout" name="horizontalLayout_31">
+                                    <item>
+                                     <widget class="QLabel" name="entropy_title">
+                                      <property name="text">
+                                       <string>엔트로피 값</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="entropy_value">
+                                      <property name="text">
+                                       <string>TextLabel</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
                                   </widget>
                                  </item>
                                 </layout>
@@ -2898,7 +2658,7 @@ QLineEdit {
               <item>
                <widget class="QStackedWidget" name="history_stackedWidget">
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="history_process_page">
                  <layout class="QVBoxLayout" name="verticalLayout_26">
@@ -3105,7 +2865,7 @@ QFrame#history_table_frame {
                         <item>
                          <widget class="QTableView" name="history_table">
                           <property name="editTriggers">
-                           <set>QAbstractItemView::NoEditTriggers</set>
+                           <set>QAbstractItemView::DoubleClicked</set>
                           </property>
                           <property name="tabKeyNavigation">
                            <bool>false</bool>
@@ -3638,7 +3398,7 @@ QFrame {
               <item>
                <widget class="QStackedWidget" name="network_stackedWidget">
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="network_process_page">
                  <layout class="QVBoxLayout" name="verticalLayout_29">
@@ -4099,7 +3859,7 @@ QLabel#content, QLabel#content_2, QLabel#content_3, QLabel#content_4, QLabel#con
                         </property>
                         <property name="styleSheet">
                          <string notr="true">* {
-	font: 63 12pt &quot;SUIT SemiBold&quot;;
+	font: 63 14pt &quot;SUIT SemiBold&quot;;
 }
 
 QHeaderView::section {
@@ -4113,37 +3873,55 @@ QHeaderView::section {
                         </attribute>
                         <layout class="QGridLayout" name="gridLayout_13">
                          <item row="0" column="0">
-                          <widget class="QTableView" name="network_log_table">
+                          <widget class="QTableWidget" name="network_log_table">
                            <property name="horizontalScrollBarPolicy">
                             <enum>Qt::ScrollBarAlwaysOff</enum>
                            </property>
+                           <property name="autoScroll">
+                            <bool>false</bool>
+                           </property>
                            <property name="editTriggers">
                             <set>QAbstractItemView::NoEditTriggers</set>
-                           </property>
-                           <property name="tabKeyNavigation">
-                            <bool>false</bool>
-                           </property>
-                           <property name="showDropIndicator" stdset="0">
-                            <bool>false</bool>
-                           </property>
-                           <property name="dragDropOverwriteMode">
-                            <bool>false</bool>
-                           </property>
-                           <property name="selectionMode">
-                            <enum>QAbstractItemView::SingleSelection</enum>
-                           </property>
-                           <property name="selectionBehavior">
-                            <enum>QAbstractItemView::SelectRows</enum>
                            </property>
                            <property name="gridStyle">
                             <enum>Qt::NoPen</enum>
                            </property>
                            <attribute name="horizontalHeaderDefaultSectionSize">
-                            <number>175</number>
+                            <number>180</number>
                            </attribute>
                            <attribute name="verticalHeaderVisible">
                             <bool>false</bool>
                            </attribute>
+                           <column>
+                            <property name="text">
+                             <string>시간</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>출발지</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>도착지</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>프로토콜</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>상태</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>패킷 크기</string>
+                            </property>
+                           </column>
                           </widget>
                          </item>
                         </layout>
@@ -4975,7 +4753,7 @@ QLabel#content, QLabel#content_2, QLabel#content_3, QLabel#content_4, QLabel#con
 }</string>
                       </property>
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>2</number>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -5432,7 +5210,7 @@ Operation은 RegSetValue, RegDeleteValue등으로 구분됩니다</string>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

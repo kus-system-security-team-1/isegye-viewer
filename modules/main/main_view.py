@@ -1,6 +1,15 @@
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QMainWindow, QWidget, QDesktopWidget, QDialog
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import (
+    QMainWindow,
+    QWidget,
+    QDesktopWidget,
+    QDialog,
+    QTableView,
+    QHeaderView,
+    QLabel,
+    QLineEdit,
+)
+from PyQt5.QtCore import QAbstractTableModel, Qt, QModelIndex
 from common.base_window import BaseWindow
 import resources.resources_rc  # noqa
 
@@ -15,13 +24,16 @@ class MainWindow(QMainWindow, BaseWindow):
         self.prevHistory_popup = None  # PrevHistoryWindow 참조
         self.alert_popup = None  # AlertWindow 참조
 
+        self.history_on_off = None
+        self.network_on_off = None
+
         self.page_stackedWidget.setCurrentIndex(0)
         self.process_stackedWidget.setCurrentIndex(0)
         self.history_stackedWidget.setCurrentIndex(0)
         self.network_stackedWidget.setCurrentIndex(0)
+        self.insert_pe_stackedWidget.setCurrentIndex(0)
         self.basic_info_table.horizontalHeader().show()
         self.dll_table.horizontalHeader().show()
-        self.pe_info_table.verticalHeader().show()
         self.filtering_table.horizontalHeader().show()
         self.history_table.horizontalHeader().show()
         self.history_ss_log_table.horizontalHeader().show()
@@ -33,7 +45,6 @@ class MainWindow(QMainWindow, BaseWindow):
             Qt.AlignLeft
         )
         self.dll_table.horizontalHeader().setDefaultAlignment(Qt.AlignLeft)
-        self.pe_info_table.verticalHeader().setDefaultAlignment(Qt.AlignLeft)
         self.filtering_table.horizontalHeader().setDefaultAlignment(
             Qt.AlignLeft
         )
@@ -48,11 +59,27 @@ class MainWindow(QMainWindow, BaseWindow):
         self.network_log_table.horizontalHeader().setDefaultAlignment(
             Qt.AlignLeft
         )
+        self.show_processes_table.horizontalHeader().setDefaultAlignment(
+            Qt.AlignLeft
+        )
         self.prev_table.horizontalHeader().setDefaultAlignment(Qt.AlignLeft)
+        self.basic_info_table.setWordWrap(True)
+        self.selected_process_label.setWordWrap(True)
+        self.dll_table.setWordWrap(True)
+
         self.prev_menu_group.setVisible(False)
         self.btn_past.setVisible(False)
         self.btn_process_menu.setChecked(True)
         self.center()
+
+        # 표 관련
+        self.process_table_elements()
+        self.history_table_elements()
+        self.network_table_elements()
+        self.selected_process = None
+        self.selected_process_pid = None
+
+        self.setup_line_edit_event()
 
     def center(self):  # 모니터 정중앙에 화면 띄우기
         qr = self.frameGeometry()
@@ -63,15 +90,23 @@ class MainWindow(QMainWindow, BaseWindow):
     def init_ui(self):
         super().init_ui("MainController")
         self.btn_process_menu.clicked.connect(
-            lambda: self.controller.switch_page(0)
+            lambda: (
+                self.controller.switch_page(0),
+                self.controller.reset_selection_process(),
+                self.insert_pe_stackedWidget.setCurrentIndex(0),
+            )
         )
         self.btn_history_menu.clicked.connect(
-            lambda: self.controller.switch_page(1)
+            lambda: (
+                self.controller.switch_page(1),
+                self.controller.reset_selection_process(),
+            )
         )
         self.btn_network_menu.clicked.connect(
             lambda: (
                 self.controller.switch_page(2),
                 self.network_tab.setCurrentIndex(0),
+                self.controller.reset_selection_process(),
             )
         )
         self.btn_previous_menu.clicked.connect(
@@ -79,6 +114,7 @@ class MainWindow(QMainWindow, BaseWindow):
                 self.controller.switch_page(3),
                 self.controller.switch_prev_page(1),
                 self.controller.prev_page_change_title(3),
+                self.controller.reset_selection_process(),
             )
         )
 
@@ -109,15 +145,174 @@ class MainWindow(QMainWindow, BaseWindow):
         )
 
         self.btn_process_analyze.clicked.connect(
-            self.controller.analyze_process_info
+            lambda: self.controller.analyze_process_info(
+                getattr(self, 'selected_process_pid', None)
+            )
         )
-        self.btn_history_analyze.clicked.connect(self.controller.trace_history)
+        self.btn_history_analyze.clicked.connect(
+            lambda: self.controller.trace_history(
+                getattr(self, 'selected_process_pid', None)
+            )
+        )
         self.btn_network_analyze.clicked.connect(
-            self.controller.network_monitoring
+            lambda: self.controller.network_monitoring(
+                getattr(self, 'selected_process_pid', None)
+            )
         )
 
         self.btn_past.clicked.connect(self.controller.show_past_history)
-        self.btn_test.clicked.connect(self.controller.test)
+        self.btn_process_prev.clicked.connect(
+            lambda: (
+                self.controller.reset_selection_process,
+                self.insert_pe_stackedWidget.setCurrentIndex(0),
+            )
+        )
+
+    # 표 표시 메소드
+
+    def process_table_elements(self):
+        self.show_processes_table = self.findChild(
+            QTableView, 'show_processes_table'
+        )
+        self.process_model = ProcessTableModel()
+        self.show_processes_table.setModel(self.process_model)
+
+        self.show_processes_table.horizontalHeader().setSectionResizeMode(
+            QHeaderView.Interactive
+        )  # 열 크기 조정 가능
+        self.show_processes_table.setColumnWidth(
+            0, 200
+        )  # PID 열 너비 (픽셀 단위)
+        self.show_processes_table.setColumnWidth(
+            1, 470
+        )  # 프로세스 이름 열 너비 (픽셀 단위)
+        self.show_processes_table.doubleClicked.connect(
+            self.on_row_double_click
+        )
+
+    def history_table_elements(self):
+        self.history_table = self.findChild(QTableView, 'history_table')
+
+        self.history_model = HistoryTableModel()
+        self.history_table.setModel(self.history_model)
+
+        self.history_table.horizontalHeader().setSectionResizeMode(
+            QHeaderView.Interactive
+        )
+
+        self.history_table.setColumnWidth(0, 550)  # 프로세스 이름 열 너비
+        self.history_table.setColumnWidth(1, 550)  # 사용자 이름 열 너비
+
+        self.history_table.doubleClicked.connect(
+            self.on_history_row_double_click
+        )
+
+    def network_table_elements(self):
+        self.network_table = self.findChild(QTableView, 'network_table')
+
+        self.network_model = NetworkTableModel()
+        self.network_table.setModel(self.network_model)
+
+        self.network_table.horizontalHeader().setSectionResizeMode(
+            QHeaderView.Interactive
+        )
+
+        self.network_table.setColumnWidth(0, 500)  # 프로세스 이름 열 너비
+        self.network_table.setColumnWidth(1, 500)  # 사용자 이름 열 너비
+
+        self.network_table.doubleClicked.connect(
+            self.on_network_row_double_click
+        )
+
+    def update_process_table(self, data):
+        self.process_model.update_data(data)
+
+    def update_history_table(self, data):
+        self.history_model.update_data(data)
+
+    def update_network_table(self, data):
+        self.network_model.update_data(data)
+
+    def setup_line_edit_event(self):
+        self.process_search_bar = self.findChild(
+            QLineEdit, 'process_search_bar'
+        )
+        if self.process_search_bar:
+            self.process_search_bar.installEventFilter(self)
+
+    def eventFilter(self, obj, event):
+        if obj == self.process_search_bar:
+            if event.type() == QtCore.QEvent.FocusIn:
+                self.insert_pe_stackedWidget.setCurrentIndex(2)
+                return True
+            elif event.type() == QtCore.QEvent.MouseButtonPress:
+                self.insert_pe_stackedWidget.setCurrentIndex(2)
+                return True
+        return super(MainWindow, self).eventFilter(obj, event)
+
+    def on_row_double_click(self, index):
+        if index.isValid():
+            row = index.row()
+            index = self.process_model.index(row, 0)
+            name_index = self.process_model.index(row, 1)
+            process_name = self.process_model.data(name_index, Qt.DisplayRole)
+            process_pid = self.process_model.data(index, Qt.DisplayRole)
+
+            self.selected_process = self.findChild(QLabel, "selected_process")
+            self.selected_process.setText(process_name)
+            self.selected_process_pid = process_pid
+
+            self.insert_pe_stackedWidget.setCurrentIndex(1)
+
+    def on_history_row_double_click(self, index):
+        try:
+            if not index.isValid():
+                print("Invalid index")
+                return
+
+            row = index.row()
+            print(f"Selected row: {row}")
+            self.selected_process_pid = self.history_model.get_pid(row)
+            if self.selected_process_pid is None:
+                print(f"Error: PID를 찾을 수 없습니다. (row: {row})")
+                return
+
+            process_name_index = self.history_model.index(row, 0)
+            process_name = self.history_model.data(
+                process_name_index, Qt.DisplayRole
+            )
+
+            self.selected_process_label = self.findChild(
+                QLabel, "selected_process_label"
+            )
+
+            self.selected_process_label.setText(
+                f"(PID: {self.selected_process_pid})\n{process_name}"
+            )
+        except Exception as e:
+            print(f"Exception 발생: {e}")
+
+    def on_network_row_double_click(self, index):
+        try:
+            if not index.isValid():
+                print("Invalid index")
+                return
+
+            row = index.row()
+            self.selected_process_pid = self.network_model.get_pid(row)
+            process_name_index = self.network_model.index(row, 0)
+            process_name = self.network_model.data(
+                process_name_index, Qt.DisplayRole
+            )
+
+            self.selected_process_label = self.findChild(
+                QLabel, "selected_process_label"
+            )
+            self.selected_process_label.setText(
+                f"(PID: {self.selected_process_pid})\n{process_name}"
+            )
+        except Exception as e:
+            print(f"Exception 발생: {e}")
 
 
 class PrevHistoryWindow(QWidget, BaseWindow):
@@ -190,3 +385,134 @@ class AlertWindow(QDialog, BaseWindow):
     def init_ui(self):
         self.btn_ok_1.clicked.connect(self.accept)
         self.btn_ok_2.clicked.connect(self.accept)
+
+
+# 실행 중인 프로세스 표시 클래스
+class ProcessTableModel(QAbstractTableModel):
+    def __init__(self, data=None):
+        super(ProcessTableModel, self).__init__()
+        self._data = data or []
+        self._headers = ['PID', '프로세스 이름']
+
+    def data(self, index, role=Qt.DisplayRole):
+        if not index.isValid():
+            return None
+
+        if role == Qt.DisplayRole:
+            process = self._data[index.row()]
+            column = index.column()
+            if column == 0:
+                return str(process.get('pid', ''))
+            elif column == 1:
+                return process.get('name', '')
+        return None
+
+    def rowCount(self, parent=QModelIndex()):
+        return len(self._data)
+
+    def columnCount(self, parent=QModelIndex()):
+        return len(self._headers)
+
+    def headerData(self, section, orientation, role=Qt.DisplayRole):
+        if role == Qt.DisplayRole:
+            if orientation == Qt.Horizontal:
+                return self._headers[section]
+        return None
+
+    def update_data(self, data):
+        self.beginResetModel()
+        self._data = data
+        self.endResetModel()
+
+
+class HistoryTableModel(QAbstractTableModel):
+    def __init__(self, data=None):
+        super(HistoryTableModel, self).__init__()
+        self._data = data or []
+        self._headers = [
+            '프로세스',
+            '사용자 이름',
+        ]
+
+    def data(self, index, role=Qt.DisplayRole):
+        if not index.isValid():
+            return None
+
+        if role == Qt.DisplayRole:
+            process = self._data[index.row()]
+            column = index.column()
+            if column == 0:
+                return str(process.get('name', ''))  # '프로세스' 열
+            elif column == 1:
+                return str(process.get('username', ''))  # 'CPU' 열
+        return None
+
+    def rowCount(self, parent=QModelIndex()):
+        return len(self._data)
+
+    def columnCount(self, parent=QModelIndex()):
+        return len(self._headers)
+
+    def headerData(self, section, orientation, role=Qt.DisplayRole):
+        if role == Qt.DisplayRole:
+            if orientation == Qt.Horizontal:
+                return self._headers[section]
+        return None
+
+    def get_pid(self, row):
+        """특정 행의 PID를 반환 (표시하지 않는 데이터)"""
+        if 0 <= row < len(self._data):
+            return self._data[row].get('pid', None)
+        return None
+
+    def update_data(self, data):
+        self.beginResetModel()
+        self._data = data
+        self.endResetModel()
+
+
+class NetworkTableModel(QAbstractTableModel):
+    def __init__(self, data=None):
+        super(NetworkTableModel, self).__init__()
+        self._data = data or []
+        self._headers = [
+            '프로세스',
+            '사용자 이름',
+        ]
+
+    def data(self, index, role=Qt.DisplayRole):
+        if not index.isValid():
+            return None
+
+        if role == Qt.DisplayRole:
+            process = self._data[index.row()]
+            column = index.column()
+            if column == 0:
+                return str(process.get('name', ''))
+            elif column == 1:
+                return str(process.get('username', ''))
+
+        return None
+
+    def rowCount(self, parent=QModelIndex()):
+        return len(self._data)
+
+    def columnCount(self, parent=QModelIndex()):
+        return len(self._headers)
+
+    def headerData(self, section, orientation, role=Qt.DisplayRole):
+        if role == Qt.DisplayRole:
+            if orientation == Qt.Horizontal:
+                return self._headers[section]
+        return None
+
+    def update_data(self, data):
+        self.beginResetModel()
+        self._data = data
+        self.endResetModel()
+
+    def get_pid(self, row):
+        """특정 행의 PID를 반환 (표시하지 않는 데이터)"""
+        if 0 <= row < len(self._data):
+            return self._data[row].get('pid', None)
+        return None

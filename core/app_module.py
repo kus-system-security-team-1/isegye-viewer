@@ -43,5 +43,4 @@ class AppModule:
                         self.controllers[attribute_name] = instance
 
     def get_controller(self, controller_name):
-        print(self.controllers, controller_name)
         return self.controllers.get(controller_name, None)

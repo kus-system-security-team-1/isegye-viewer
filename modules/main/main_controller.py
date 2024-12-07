@@ -1,16 +1,28 @@
 from modules.main.main_service import MainService
 from modules.main.main_view import PrevHistoryWindow, AlertWindow
-from PyQt5.QtWidgets import QTableWidgetItem, QLabel
+from PyQt5.QtWidgets import QTableWidgetItem, QLabel, QPushButton
 from PyQt5.QtCore import Qt, QTimer
+import json, re
 from lib.isegye_viewer_core import DetectEntropyType
 
 
 class MainController:
-    def __init__(self, config, view=None, app_module=None):
+    def __init__(
+        self,
+        config,
+        view=None,
+        app_module=None,
+        filtering_table_file="filtering_table.json",
+    ):
         self.view = view
         self.config = config
         self.app_module = app_module
         self.service = MainService(config)
+
+        self.filtering_table_file = filtering_table_file
+        self.filtering_data = []
+        self.load_filtering_table()
+        self.update_filtering_table()
 
         self.history_controller = self.app_module.get_controller(
             "HistoryController"
@@ -175,20 +187,135 @@ class MainController:
             print(f"Error : {e}")
 
     def show_detail_dll(self, pid=None):
-
         dll_list = self.process_controller.get_process_modules(int(pid))
         self.view.dll_table.setRowCount(len(dll_list))
         self.view.dll_table.setColumnCount(2)
 
+        # 필터링 목록 (이름만 추출)
+        filtering_dlls = [item["name"].lower() for item in self.filtering_data]
+
         for index, dll_path in enumerate(dll_list, start=1):
             index_item = QTableWidgetItem(str(index))
             dll_item = QTableWidgetItem(dll_path)
+
+            dll_name = dll_path.split("\\")[-1].lower()
+            if dll_name in filtering_dlls:
+                index_item.setForeground(Qt.red)
+                dll_item.setForeground(Qt.red)
+
+                for row, item in enumerate(self.filtering_data):
+                    if item["name"].lower() == dll_name:
+                        item["status"] = "detected"
+                        self.view.filtering_table.item(row, 1).setText(
+                            "detected"
+                        )
+                        self.view.filtering_table.item(row, 1).setForeground(
+                            Qt.green
+                        )
+                        break
 
             self.view.dll_table.setItem(index - 1, 0, index_item)
             self.view.dll_table.setItem(index - 1, 1, dll_item)
 
         self.view.dll_table.setColumnWidth(0, 30)
         self.view.dll_table.setColumnWidth(1, 870)
+        self.save_filtering_table()
+
+    def load_filtering_table(self):
+        try:
+            with open(
+                self.filtering_table_file, "r", encoding="utf-8"
+            ) as file:
+                self.filtering_data = json.load(file)
+        except FileNotFoundError:
+            self.filtering_data = []
+        except json.JSONDecodeError:
+            print("JSON 파일을 읽을 수 없습니다.")
+            self.filtering_data = []
+
+    def save_filtering_table(self):
+        try:
+            with open(
+                self.filtering_table_file, "w", encoding="utf-8"
+            ) as file:
+                json.dump(
+                    self.filtering_data, file, ensure_ascii=False, indent=4
+                )
+        except Exception as e:
+            print(f"Error: 필터링 테이블 저장 중 문제가 발생했습니다. {e}")
+
+    def add_to_filtering_table(self):
+        name = self.view.filtering_search_bar.text().strip()
+
+        dll_pattern = r"^[a-zA-Z0-9_\-]+\.dll$"
+        if not re.match(dll_pattern, name, re.IGNORECASE):
+            print("Error: 잘못된 형식의 DLL 이름입니다. 예: test.dll")
+            self.view.filtering_search_bar.clear()
+            return
+
+        if not name or any(
+            item["name"].lower() == name.lower()
+            for item in self.filtering_data
+        ):
+            return
+
+        new_entry = {"name": name, "status": "undetected"}
+        self.filtering_data.append(new_entry)
+        self.save_filtering_table()
+        self.update_filtering_table()
+
+        self.view.filtering_search_bar.clear()
+
+    def update_filtering_table(self):
+        """테이블 UI를 업데이트 및 스타일 유지"""
+        table = self.view.filtering_table
+        table.setRowCount(len(self.filtering_data))
+
+        for row, item in enumerate(self.filtering_data):
+            name = item.get("name", "")
+            status = item.get("status", "undetected")
+
+            # 이름 설정
+            name_item = QTableWidgetItem(name)
+            table.setItem(row, 0, name_item)
+
+            # 감지 여부 설정
+            status_item = QTableWidgetItem(status)
+            if status == "detected":
+                status_item.setForeground(Qt.green)  # 연두색
+            else:
+                status_item.setForeground(Qt.red)  # 빨간색
+            table.setItem(row, 1, status_item)
+
+            # 삭제 버튼 추가
+            delete_button = QPushButton("삭제", self.view)
+            delete_button.setStyleSheet(
+                """
+                QPushButton {
+                    background-color: #ff4d4d;  /* 붉은 배경 */
+                    color: white;              /* 흰색 텍스트 */
+                    border: none;              /* 테두리 없음 */
+                    border-radius: 5px;        /* 둥근 모서리 */
+                    padding: 5px 10px;         /* 내부 여백 */
+                }
+                QPushButton:hover {
+                    background-color: #ff1a1a; /* 호버 시 더 어두운 빨강 */
+                }
+                QPushButton:pressed {
+                    background-color: #cc0000; /* 클릭 시 더 어두운 빨강 */
+                }
+                """
+            )
+            delete_button.clicked.connect(
+                lambda _, r=row: self.remove_from_filtering_table(r)
+            )
+            table.setCellWidget(row, 2, delete_button)
+
+    def remove_from_filtering_table(self, row):
+        if 0 <= row < len(self.filtering_data):
+            del self.filtering_data[row]
+            self.save_filtering_table()
+            self.update_filtering_table()
 
     def trace_history(self, pid=None):
         try:
@@ -315,7 +442,6 @@ class MainController:
         if not search_text:
             self.view.insert_pe_stackedWidget.setCurrentIndex(2)
 
-        # 모델 가져오기
         model = self.view.show_processes_table.model()
         if model is None:
             print("No model set for the table.")
@@ -323,23 +449,20 @@ class MainController:
 
         matching_rows = []
         for row in range(model.rowCount()):
-            index = model.index(row, 1)  # 프로세스 이름이 있는 열 (1번 열)
+            index = model.index(row, 1)
             process_name = model.data(index, Qt.DisplayRole)
 
             if process_name and search_text.lower() in process_name.lower():
-                pid_index = model.index(row, 0)  # PID가 있는 열 (0번 열)
+                pid_index = model.index(row, 0)
                 pid = model.data(pid_index, Qt.DisplayRole)
                 matching_rows.append((pid, process_name))
 
-        # 검색 결과를 show_same_name_process_table에 표시
         if matching_rows:
             self.view.insert_pe_stackedWidget.setCurrentIndex(3)
             self.view.show_same_name_process_table.setRowCount(
                 len(matching_rows)
             )
-            self.view.show_same_name_process_table.setColumnCount(
-                2
-            )  # PID, 프로세스 이름
+            self.view.show_same_name_process_table.setColumnCount(2)
             self.view.show_same_name_process_table.doubleClicked.connect(
                 self.on_table_double_click
             )
@@ -362,26 +485,17 @@ class MainController:
                 0, 0, QTableWidgetItem("존재하지 않습니다")
             )
 
-        self.view.show_same_name_process_table.setColumnWidth(
-            0, 200
-        )  # PID 열 너비
-        self.view.show_same_name_process_table.setColumnWidth(
-            1, 470
-        )  # 프로세스 이름 열 너비
+        self.view.show_same_name_process_table.setColumnWidth(0, 200)
+        self.view.show_same_name_process_table.setColumnWidth(1, 470)
 
     def on_table_double_click(self, index):
         try:
             if not index.isValid():
                 return
 
-            # 더블 클릭된 행과 열의 데이터 가져오기
             row = index.row()
-            pid_item = self.view.show_same_name_process_table.item(
-                row, 0
-            )  # PID (첫 번째 열)
-            name_item = self.view.show_same_name_process_table.item(
-                row, 1
-            )  # 프로세스 이름 (두 번째 열)
+            pid_item = self.view.show_same_name_process_table.item(row, 0)
+            name_item = self.view.show_same_name_process_table.item(row, 1)
 
             if pid_item and name_item:
                 pid = pid_item.text()

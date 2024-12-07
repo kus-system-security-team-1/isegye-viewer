@@ -934,7 +934,7 @@ QFrame#process_info_btn_group {
                  <item>
                   <widget class="QStackedWidget" name="process_stackedWidget">
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="search_page">
                     <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -1085,7 +1085,7 @@ QFrame#process_info_btn_group {
                      <item>
                       <widget class="QStackedWidget" name="insert_pe_stackedWidget">
                        <property name="currentIndex">
-                        <number>3</number>
+                        <number>2</number>
                        </property>
                        <widget class="QWidget" name="fileDropPage">
                         <layout class="QHBoxLayout" name="horizontalLayout_20">
@@ -2367,7 +2367,11 @@ QLineEdit {
                                  </size>
                                 </property>
                                 <property name="styleSheet">
-                                 <string notr="true"/>
+                                 <string notr="true">QPushButton {
+	color: white;
+	background-color: rgb(255, 0, 4);
+}
+</string>
                                 </property>
                                 <property name="frameShape">
                                  <enum>QFrame::StyledPanel</enum>
@@ -2477,17 +2481,17 @@ QLineEdit {
                                    <row/>
                                    <column>
                                     <property name="text">
-                                     <string>No.</string>
-                                    </property>
-                                   </column>
-                                   <column>
-                                    <property name="text">
                                      <string>이름</string>
                                     </property>
                                    </column>
                                    <column>
                                     <property name="text">
                                      <string>감지 여부</string>
+                                    </property>
+                                   </column>
+                                   <column>
+                                    <property name="text">
+                                     <string>삭제</string>
                                     </property>
                                    </column>
                                   </widget>

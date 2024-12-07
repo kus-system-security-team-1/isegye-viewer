@@ -8,6 +8,9 @@ from PyQt5.QtWidgets import (
     QHeaderView,
     QLabel,
     QLineEdit,
+    QTableWidget,
+    QTableWidgetItem,
+    QPushButton,
 )
 from PyQt5.QtCore import QAbstractTableModel, Qt, QModelIndex
 from common.base_window import BaseWindow
@@ -18,6 +21,7 @@ class MainWindow(QMainWindow, BaseWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         BaseWindow.__init__(self, "ui/main_window.ui")
+
         self.controller = None
         self.app_module = None
 
@@ -100,6 +104,7 @@ class MainWindow(QMainWindow, BaseWindow):
                 self.controller.switch_page(0),
                 self.controller.reset_selection_process(),
                 self.insert_pe_stackedWidget.setCurrentIndex(0),
+                self.process_search_bar.clear(),
             )
         )
         self.btn_history_menu.clicked.connect(
@@ -177,6 +182,9 @@ class MainWindow(QMainWindow, BaseWindow):
         self.dll_search_bar.textChanged.connect(self.controller.search_dll)
         self.process_search_bar.textChanged.connect(
             self.controller.search_process
+        )
+        self.filtering_search_bar.returnPressed.connect(
+            self.controller.add_to_filtering_table
         )
 
     # 표 표시 메소드
@@ -324,6 +332,29 @@ class MainWindow(QMainWindow, BaseWindow):
             )
         except Exception as e:
             print(f"Exception 발생: {e}")
+
+    def update_filtering_table(self, data):
+        self.filtering_table.setRowCount(len(data))
+        for row, item in enumerate(data):
+            dll_name = item.get("dll_name", "")
+            detection_status = item.get("detection_status", "정상")
+
+            # DLL 이름
+            self.filtering_table.setItem(row, 0, QTableWidgetItem(dll_name))
+
+            # 감지 여부
+            self.filtering_table.setItem(
+                row, 1, QTableWidgetItem(detection_status)
+            )
+
+            # 삭제 버튼
+            delete_button = QPushButton("삭제", self)
+            delete_button.clicked.connect(
+                lambda _, r=row: self.controller.remove_from_filtering_dll_table(
+                    r
+                )
+            )
+            self.filtering_table.setCellWidget(row, 2, delete_button)
 
 
 class PrevHistoryWindow(QWidget, BaseWindow):

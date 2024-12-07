@@ -4,3 +4,5 @@ __pycache__/
 .pytest_cache/
 file_access.log
 lib/*
+log/
+filtering_table.json

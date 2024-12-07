@@ -50,7 +50,7 @@ class ProcesssController:
                     "name": name,
                     "pid": pid,
                     "username": username,
-                    "cpu_usage": cpu_usage,
+                    "cpu_usage": formatted_cpu_usage,
                     "memory": formatted_memory,
                 }
             )

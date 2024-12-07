@@ -2,6 +2,7 @@ from modules.main.main_service import MainService
 from modules.main.main_view import PrevHistoryWindow, AlertWindow
 from PyQt5.QtWidgets import QTableWidgetItem, QLabel
 from PyQt5.QtCore import Qt, QTimer
+from lib.isegye_viewer_core import DetectEntropyType
 
 
 class MainController:
@@ -31,20 +32,24 @@ class MainController:
             self.view.history_table.setVisible(True)
             self.view.history_process_search_bar.setEnabled(True)
             self.view.btn_history_analyze.setEnabled(True)
+            self.view.history_process_search_bar.setEnabled(True)
             self.update_history_table()
         else:
             self.view.history_process_search_bar.setEnabled(False)
             self.view.btn_history_analyze.setEnabled(False)
             self.view.history_table.setVisible(False)
+            self.view.history_process_search_bar.setEnabled(False)
 
         if self.view.network_toggle.isChecked():
             self.view.network_table.setVisible(True)
             self.view.network_process_search_bar.setEnabled(True)
             self.view.btn_network_analyze.setEnabled(True)
+            self.view.network_process_search_bar.setEnabled(True)
             self.update_network_table()
         else:
             self.view.network_process_search_bar.setEnabled(False)
             self.view.btn_network_analyze.setEnabled(False)
+            self.view.network_process_search_bar.setEnabled(False)
             self.view.network_table.setVisible(False)
 
     def update_process_table(self):
@@ -113,51 +118,61 @@ class MainController:
         self.view.selected_process_label.setText("")
 
     def analyze_process_info(self, pid=None):
-        if not pid:
-            print("Invalid PID")
-            return
+        try:
+            if not pid:
+                print("Invalid PID")
+                return
 
-        process = self.view.selected_process.text()
-        if not process:
-            print("Process name is empty.")
-            return
+            process = self.view.selected_process.text()
+            if not process:
+                print("Process name is empty.")
+                return
 
-        self.view.selected_process_label.setText(f"(PID: {pid})\n{process}")
-        self.view.process_stackedWidget.setCurrentIndex(1)
+            self.view.selected_process_label.setText(
+                f"(PID: {pid})\n{process}"
+            )
+            self.view.process_stackedWidget.setCurrentIndex(1)
 
-        detail_info = self.process_controller.get_detail_process_info(pid)
+            detail_info = self.process_controller.get_detail_process_info(pid)
 
-        if not detail_info or not isinstance(detail_info, list):
-            print("Invalid detail_info data")
-            return
+            if not detail_info or not isinstance(detail_info, list):
+                print("Invalid detail_info data")
+                return
 
-        process_data = detail_info[0]
+            process_data = detail_info[0]
 
-        self.view.basic_info_table.setRowCount(1)
-        self.view.basic_info_table.setColumnCount(len(process_data))
+            self.view.basic_info_table.setRowCount(1)
+            self.view.basic_info_table.setColumnCount(len(process_data))
 
-        for col, key in enumerate(process_data.keys()):
-            item = QTableWidgetItem(str(process_data[key]))
-            self.view.basic_info_table.setItem(0, col, item)
+            for col, key in enumerate(process_data.keys()):
+                item = QTableWidgetItem(str(process_data[key]))
+                self.view.basic_info_table.setItem(0, col, item)
 
-        self.show_detail_dll(pid)
+            self.show_detail_dll(pid)
 
-        entropy = self.pe_controller.calculate_entropy(process)
-        style = ""
-        if entropy >= 7.8:
-            style = "color: red;"
-        elif entropy >= 7.5 and entropy < 7.8:
-            style = "color: yellow;"
-        elif entropy >= 6.5 and entropy < 7.5:
-            style = "color: green;"
-        else:
-            style = "color: grey;"
+            process_name = self.process_controller.get_process_name(int(pid))
+            entropy, level_entropy = self.pe_controller.detect_entropy(
+                process_name
+            )
+            style = ""
 
-        if entropy == -1:
-            entropy = "예외 처리"
+            if level_entropy == DetectEntropyType.HIGH:
+                style = "color: red;"
+            elif level_entropy == DetectEntropyType.MIDDLE:
+                style = "color: orange;"
+            elif level_entropy == DetectEntropyType.LOW:
+                style = "color: green;"
+            else:
+                style = "color: grey;"
 
-        self.view.entropy_value.setStyleSheet(style)
-        self.view.entropy_value.setText(str(entropy))
+            self.view.entropy_value.setStyleSheet(style)
+            print(
+                f"level : {level_entropy}, type : {type(level_entropy)}, style : {style}"
+            )
+            self.view.entropy_value.setText(str(entropy))
+
+        except Exception as e:
+            print(f"Error : {e}")
 
     def show_detail_dll(self, pid=None):
 

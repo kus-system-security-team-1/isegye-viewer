@@ -1,6 +1,6 @@
 from modules.process.process_service import ProcessService
-
-# from modules.process.process_view import ProcessWindow
+from datetime import datetime
+from pathlib import Path
 
 
 class ProcesssController:
@@ -50,7 +50,7 @@ class ProcesssController:
                     "name": name,
                     "pid": pid,
                     "username": username,
-                    "cpu_usage": formatted_cpu_usage,
+                    "cpu_usage": cpu_usage,
                     "memory": formatted_memory,
                 }
             )
@@ -103,6 +103,41 @@ class ProcesssController:
             username = self.service.get_process_owner(pid)
             start_time = "-"
             end_time = "-"
+
+            process_data = []
+            current_day = datetime.now().strftime("%Y-%m-%d")
+            folder = Path(f"./log/history/{current_day}")
+            if not folder.exists():
+                print(
+                    f"Error: The folder '{folder}' does not exist or is not a directory."
+                )
+                return
+            file_name = process_name.split(".exe")[0] + ".txt"
+            file_path = folder / file_name
+            if not file_path.exists() or not file_path.is_file():
+                print(
+                    f"Error: The file '{file_name}' does not exist in the folder '{folder}'."
+                )
+                return
+
+            with file_path.open("r", encoding="utf-8") as file:
+                lines = file.read().strip().split("-----------------------\n")
+                for block in lines:
+                    if block.strip():  # 빈 블록 제외
+                        process = {}
+                        for line in block.strip().split("\n"):
+                            if ": " in line:
+                                key, value = line.split(": ", 1)
+                                process[key] = value
+                            else:
+                                print(
+                                    f"Warning: Skipping invalid line: {line}"
+                                )
+                        process_data.append(process)
+
+            last_log = process_data[-1]
+            start_time = last_log.get("Start Time", "N/A")
+            end_time = last_log.get("End Time", "N/A")
 
             detail_info.append(
                 {

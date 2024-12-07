@@ -12,7 +12,6 @@ class PEController:
             entropy = self.service.calculate_entropy(pe_name)
             level_entropy = self.service.detect_entropy_level(entropy)
             entropy = round(entropy, 1)
-
             return entropy, level_entropy
         except Exception as e:
             print(f"Error : {e}")

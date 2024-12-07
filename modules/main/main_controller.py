@@ -204,6 +204,9 @@ class MainController:
             else:
                 process = process.rsplit('\\', 1)[-1]
 
+            self.history_controller.log_process_times_to_file(
+                int(pid), process
+            )
             detail_info = (
                 self.process_controller.get_detail_history_process_info(pid)
             )

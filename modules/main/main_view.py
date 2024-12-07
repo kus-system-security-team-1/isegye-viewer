@@ -41,6 +41,7 @@ class MainWindow(QMainWindow, BaseWindow):
         self.network_table.horizontalHeader().show()
         self.network_log_table.horizontalHeader().show()
         self.prev_table.horizontalHeader().show()
+        self.show_same_name_process_table.horizontalHeader().show()
         self.basic_info_table.horizontalHeader().setDefaultAlignment(
             Qt.AlignLeft
         )
@@ -63,6 +64,11 @@ class MainWindow(QMainWindow, BaseWindow):
             Qt.AlignLeft
         )
         self.prev_table.horizontalHeader().setDefaultAlignment(Qt.AlignLeft)
+        self.show_same_name_process_table.horizontalHeader().setDefaultAlignment(
+            Qt.AlignLeft
+        )
+        headers = ["PID", "프로세스 이름"]
+        self.show_same_name_process_table.setHorizontalHeaderLabels(headers)
         self.basic_info_table.setWordWrap(True)
         self.selected_process_label.setWordWrap(True)
         self.dll_table.setWordWrap(True)
@@ -166,6 +172,11 @@ class MainWindow(QMainWindow, BaseWindow):
                 self.controller.reset_selection_process,
                 self.insert_pe_stackedWidget.setCurrentIndex(0),
             )
+        )
+
+        self.dll_search_bar.textChanged.connect(self.controller.search_dll)
+        self.process_search_bar.textChanged.connect(
+            self.controller.search_process
         )
 
     # 표 표시 메소드

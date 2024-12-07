@@ -42,15 +42,16 @@ class ProcesssController:
                 name = name.rsplit('\\', 1)[-1]
             username = self.service.get_process_owner(pid)
             cpu_usage = self.service.get_current_cpu_usage(pid)
-            memory = self.service.get_virtual_mem_usage(pid) / 1024
-
+            formatted_cpu_usage = f"{cpu_usage:.1f} %"
+            memory = self.service.get_virtual_mem_usage(pid) / (1024 * 1024)
+            formatted_memory = f"{memory:.1f} MB"
             detail_info.append(
                 {
                     "name": name,
                     "pid": pid,
                     "username": username,
-                    "cpu_usage": cpu_usage,
-                    "memory": memory,
+                    "cpu_usage": formatted_cpu_usage,
+                    "memory": formatted_memory,
                 }
             )
         except Exception as e:

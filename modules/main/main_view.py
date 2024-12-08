@@ -16,13 +16,14 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import QAbstractTableModel, Qt, QModelIndex
 from common.base_window import BaseWindow
 from lib.isegye_viewer_core import DetectEntropyType
+from utils.path import resource_path
 import resources.resources_rc  # noqa
 
 
 class MainWindow(QMainWindow, BaseWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        BaseWindow.__init__(self, "ui/main_window.ui")
+        BaseWindow.__init__(self, resource_path("ui/main_window.ui"))
 
         self.controller = None
         self.app_module = None
@@ -404,7 +405,7 @@ class MainWindow(QMainWindow, BaseWindow):
 class PrevHistoryWindow(QWidget, BaseWindow):
     def __init__(self, parent=None):
         QWidget.__init__(self)
-        BaseWindow.__init__(self, "ui/prevHistory_window.ui")
+        BaseWindow.__init__(self, resource_path("ui/prevHistory_window.ui"))
         self.prevHistory_registry_table.horizontalHeader().show()
         self.prevHistory_ss_log_table.horizontalHeader().show()
         self.prev_process_basic_info_table.horizontalHeader().show()
@@ -454,7 +455,7 @@ class PrevHistoryWindow(QWidget, BaseWindow):
 class AlertWindow(QDialog, BaseWindow):
     def __init__(self, parent=None):
         QDialog.__init__(self)
-        BaseWindow.__init__(self, "ui/alert_window.ui")
+        BaseWindow.__init__(self, resource_path("ui/alert_window.ui"))
         self.controller = None
         self.alert_stackedWidget.setCurrentIndex(1)
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)

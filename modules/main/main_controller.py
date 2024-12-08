@@ -51,6 +51,14 @@ class MainController:
             self.on_network_toggle_changed
         )
 
+        # --- 추가 부분 시작 ---
+        self.cpu_mem_timer = QTimer()  # CPU/메모리 업데이트용 타이머
+        self.cpu_mem_timer.timeout.connect(self.update_cpu_mem_info)
+        self.current_pid = None
+        self.detail_keys = []
+        self.view.process_stackedWidget.currentChanged.connect(self.on_process_page_change)
+        # --- 추가 부분 종료 ---
+
     def update_tables(self):
         if self.view.insert_pe_stackedWidget.currentIndex() == 2:
             self.update_process_table()
@@ -175,6 +183,14 @@ class MainController:
                 item = QTableWidgetItem(str(process_data[key]))
                 self.view.basic_info_table.setItem(0, col, item)
 
+            # --- 추가 부분 시작 ---
+            # 프로세스 상세 정보 키를 저장
+            self.detail_keys = list(process_data.keys())
+            self.current_pid = int(pid)
+            # CPU/메모리 업데이트 타이머 시작(3초 간격)
+            self.cpu_mem_timer.start(3000)
+            # --- 추가 부분 종료 ---
+
             self.show_detail_dll(pid)
 
             process_name = self.process_controller.get_process_name(int(pid))
@@ -203,6 +219,41 @@ class MainController:
 
         except Exception as e:
             print(f"Error : {e}")
+
+    # --- 추가 메서드 시작 ---
+    def update_cpu_mem_info(self):
+        """ 주기적으로 CPU 및 메모리 정보를 업데이트 """
+        if not self.current_pid:
+            self.cpu_mem_timer.stop()
+            return
+
+        detail_info = self.process_controller.get_detail_process_info(self.current_pid)
+        if not detail_info or not isinstance(detail_info, list):
+            print("Failed to retrieve process detail info.")
+            self.cpu_mem_timer.stop()
+            return
+
+        process_data = detail_info[0]
+
+        # CPU 및 메모리 컬럼 인덱스 찾기
+        if 'cpu_usage' in self.detail_keys:
+            cpu_col = self.detail_keys.index('cpu_usage')
+            cpu_item = QTableWidgetItem(str(process_data['cpu_usage']))
+            self.view.basic_info_table.setItem(0, cpu_col, cpu_item)
+
+        if 'memory' in self.detail_keys:
+            mem_col = self.detail_keys.index('memory')
+            mem_item = QTableWidgetItem(str(process_data['memory']))
+            self.view.basic_info_table.setItem(0, mem_col, mem_item)
+    # --- 추가 메서드 종료 ---
+
+    # --- 페이지 전환 시 타이머 중지 ---
+    def on_process_page_change(self, index):
+        # 프로세스 상세 정보 페이지가 아닌 다른 페이지로 전환 시 타이머 정지
+        if index != 1:
+            self.cpu_mem_timer.stop()
+            self.current_pid = None
+    # --- 추가 부분 종료 ---
 
     def show_detail_dll(self, pid=None):
         dll_list = self.process_controller.get_process_modules(int(pid))
@@ -300,9 +351,9 @@ class MainController:
             # 감지 여부 설정
             status_item = QTableWidgetItem(status)
             if status == "detected":
-                status_item.setForeground(Qt.green)  # 연두색
+                status_item.setForeground(Qt.green)
             else:
-                status_item.setForeground(Qt.red)  # 빨간색
+                status_item.setForeground(Qt.red)
             table.setItem(row, 1, status_item)
 
             # 삭제 버튼 추가
@@ -310,17 +361,17 @@ class MainController:
             delete_button.setStyleSheet(
                 """
                 QPushButton {
-                    background-color: #ff4d4d;  /* 붉은 배경 */
-                    color: white;              /* 흰색 텍스트 */
-                    border: none;              /* 테두리 없음 */
-                    border-radius: 5px;        /* 둥근 모서리 */
-                    padding: 5px 10px;         /* 내부 여백 */
+                    background-color: #ff4d4d;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 5px 10px;
                 }
                 QPushButton:hover {
-                    background-color: #ff1a1a; /* 호버 시 더 어두운 빨강 */
+                    background-color: #ff1a1a;
                 }
                 QPushButton:pressed {
-                    background-color: #cc0000; /* 클릭 시 더 어두운 빨강 */
+                    background-color: #cc0000;
                 }
                 """
             )

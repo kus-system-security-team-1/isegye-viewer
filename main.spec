@@ -1,12 +1,32 @@
 # -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import collect_submodules
 
+added_files = [
+    ('ui/*.ui', 'ui'),
+    ('resources/*', 'resources'),
+    ('modules/*', 'modules'),
+    ('lib/*', 'lib'),
+    ('core/*', 'core'),
+]
+
+hidden_imports = [
+    'modules.main.main_view',
+    'modules.main.main_controller',
+    'core.app_module',
+    'modules.process',
+    'modules.history',
+    'modules.pe',
+    'modules.network',
+    'modules.main',
+    'lib.isegye_viewer_core',
+]
 
 a = Analysis(
     ['main.py'],
-    pathex=[],
+    pathex=['.'],
     binaries=[],
-    datas=[],
-    hiddenimports=[],
+    datas=added_files,
+    hiddenimports=hidden_imports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

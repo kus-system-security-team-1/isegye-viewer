@@ -82,3 +82,9 @@ class ProcessService:
 
     def is_module_loaded(self, pid, module_name):
         return self.lib.isModuleLoaded(pid, module_name)
+
+    def block_process_traffic(self, pid):
+        self.lib.blockProcessTraffic(pid)
+
+    def unblock_process_traffic(self, pid):
+        self.lib.unblockProcessTraffic(pid)

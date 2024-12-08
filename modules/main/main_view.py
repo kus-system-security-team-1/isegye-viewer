@@ -11,9 +11,11 @@ from PyQt5.QtWidgets import (
     QTableWidget,
     QTableWidgetItem,
     QPushButton,
+    QFrame,
 )
 from PyQt5.QtCore import QAbstractTableModel, Qt, QModelIndex
 from common.base_window import BaseWindow
+from lib.isegye_viewer_core import DetectEntropyType
 import resources.resources_rc  # noqa
 
 
@@ -412,7 +414,7 @@ class AlertWindow(QDialog, BaseWindow):
         QDialog.__init__(self)
         BaseWindow.__init__(self, "ui/alert_window.ui")
         self.controller = None
-        self.alert_stackedWidget.setCurrentIndex(0)
+        self.alert_stackedWidget.setCurrentIndex(1)
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.center()
@@ -427,6 +429,63 @@ class AlertWindow(QDialog, BaseWindow):
     def init_ui(self):
         self.btn_ok_1.clicked.connect(self.accept)
         self.btn_ok_2.clicked.connect(self.accept)
+
+    def set_alert_message(self, level_entropy, process_name):
+        label_style = ""
+        process_name_label = self.findChild(QLabel, "process_name_label_2")
+        frame_label = self.findChild(QFrame, "suspect_alert_frame")
+        text_label = self.findChild(QLabel, "suspect_level")
+
+        if level_entropy == DetectEntropyType.HIGH:
+            label_style = "color: red;"
+            text_label.setText("높음")
+            frame_label.setStyleSheet(
+                """
+            #suspect_alert_frame {
+                background-color: #EEE6DD;
+                border: 5px solid #EE8181;
+                border-radius: 25px;
+            }
+            """
+            )
+        elif level_entropy == DetectEntropyType.MIDDLE:
+            label_style = "color: orange;"
+            text_label.setText("중간")
+            frame_label.setStyleSheet(
+                """
+            #suspect_alert_frame {
+                background-color: #EEE6DD;
+                border: 5px solid #FE7614;
+                border-radius: 25px;
+            }
+            """
+            )
+        elif level_entropy == DetectEntropyType.LOW:
+            label_style = "color: green;"
+            text_label.setText("정상")
+            frame_label.setStyleSheet(
+                """
+            #suspect_alert_frame {
+                background-color: #EEE6DD;
+                border: 5px solid #AAD298;
+                border-radius: 25px;
+            }
+            """
+            )
+        else:
+            label_style = "color: grey;"
+            text_label.setText("예외 처리")
+            frame_label.setStyleSheet(
+                """
+            #suspect_alert_frame {
+                background-color: #EEE6DD;
+                border: 5px solid #AAD298;
+                border-radius: 25px;
+            }
+            """
+            )
+        process_name_label.setText(process_name)
+        text_label.setStyleSheet(label_style)
 
 
 # 실행 중인 프로세스 표시 클래스

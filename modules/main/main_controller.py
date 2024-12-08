@@ -2,6 +2,7 @@ from modules.main.main_service import MainService
 from modules.main.main_view import PrevHistoryWindow, AlertWindow
 from PyQt5.QtWidgets import QTableWidgetItem, QLabel, QPushButton
 from PyQt5.QtCore import Qt, QTimer
+from datetime import datetime
 import json, re
 from lib.isegye_viewer_core import DetectEntropyType
 
@@ -33,8 +34,19 @@ class MainController:
         )
 
         self.timer = QTimer()
-        self.timer.timeout.connect(self.update_tables)  # 하나의 슬롯에 연결
-        self.timer.start(1000)  # 1초마다 갱신
+        self.timer.timeout.connect(self.update_tables)
+        self.timer.start(1000)
+
+        self.network_timer = QTimer()
+        self.network_timer.timeout.connect(self.refresh_network_data)
+        self.network_current_pid = None
+
+        self.view.network_stackedWidget.currentChanged.connect(
+            self.check_network_page
+        )
+        self.view.network_toggle.toggled.connect(
+            self.on_network_toggle_changed
+        )
 
     def update_tables(self):
         if self.view.insert_pe_stackedWidget.currentIndex() == 2:
@@ -178,10 +190,13 @@ class MainController:
                 style = "color: grey;"
 
             self.view.entropy_value.setStyleSheet(style)
-            print(
-                f"level : {level_entropy}, type : {type(level_entropy)}, style : {style}"
-            )
             self.view.entropy_value.setText(str(entropy))
+
+            if self.view.alert_popup is None:
+                self.view.alert_popup = AlertWindow(parent=self.view)
+            self.view.alert_popup.set_alert_message(level_entropy, process)
+            self.view.alert_popup.exec()
+            self.view.alert_popup = None
 
         except Exception as e:
             print(f"Error : {e}")
@@ -359,45 +374,84 @@ class MainController:
     def network_monitoring(self, pid=None):
         try:
             if not pid:
-                print("Invalid PID")
+                print("First Invalid PID")
                 return
-            packet_info = []
-            self.view.network_stackedWidget.setCurrentIndex(1)
+            if self.view.network_toggle.isChecked():
+                self.network_current_pid = int(pid)
+                self.view.network_stackedWidget.setCurrentIndex(1)
+
+                self.view.network_log_table.setRowCount(0)
+                self.refresh_network_data()
+                self.network_timer.start(1000)
+            else:
+                print(
+                    "Network toggle is not checked. Monitoring cannot start."
+                )
+
+        except Exception as e:
+            print(f"Network_monitoring : {e}")
+
+    def refresh_network_data(self):
+        try:
+            if not self.view.network_toggle.isChecked():
+                self.stop_network_monitoring()
+                return
+
+            if not self.network_current_pid:
+                print("Second Invalid PID")
+                return
             network_packets = (
                 self.process_controller.show_all_network_packets()
             )
 
             selected_packet = [
-                entry for entry in network_packets if entry['pid'] == pid
+                entry
+                for entry in network_packets
+                if entry['pid'] == self.network_current_pid
             ]
             if selected_packet:
                 packet = selected_packet[0]
-                time = "-"
-                local_add = packet['local_address']
-                remote_add = packet['remote_address']
-                protocol = packet['protocol']
-                status = packet['status']
-                packet_size = "-"
+                current_time = datetime.now().strftime("%H:%M:%S")
+                packet_info = {
+                    "time": current_time,
+                    "local_add": packet['local_address'],
+                    "remote_add": packet['remote_address'],
+                    "protocol": packet['protocol'],
+                    "status": packet['status'],
+                    "packet_size": "-",
+                }
+                current_row_count = self.view.network_log_table.rowCount()
+                self.view.network_log_table.insertRow(current_row_count)
 
-                packet_info.append(
-                    {
-                        "time": time,
-                        "local_add": local_add,
-                        "remote_add": remote_add,
-                        "protocol": protocol,
-                        "status": status,
-                        "packet_size": packet_size,
-                    }
-                )
-                self.view.network_log_table.setRowCount(1)
-                self.view.network_log_table.setColumnCount(6)
-
-                for col, (key, value) in enumerate(packet_info[0].items()):
+                for col, (key, value) in enumerate(packet_info.items()):
                     item = QTableWidgetItem(str(value))
-                    self.view.network_log_table.setItem(0, col, item)
+                    self.view.network_log_table.setItem(
+                        current_row_count, col, item
+                    )
 
         except Exception as e:
-            print(f"Network_monitoring : {e}")
+            print(f"network table error : {e}")
+
+    def stop_network_monitoring(self):
+        self.network_timer.stop()
+        self.current_pid = None
+
+    def check_network_page(self, index):
+        if index == 1 and self.view.network_toggle.isChecked():
+            if self.network_current_pid:
+                self.network_timer.start(1000)
+            else:
+                self.stop_network_monitoring()
+
+    def on_network_toggle_changed(self, checked):
+        if checked:
+            if (
+                self.view.network_stackedWidget.currentIndex() == 1
+                and self.network_current_pid
+            ):
+                self.network_timer.start(1000)
+            else:
+                self.stop_network_monitoring()
 
     def search_dll(self):
         search_text = self.view.dll_search_bar.text().strip()

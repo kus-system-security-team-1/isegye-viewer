@@ -186,3 +186,6 @@ class ProcesssController:
         except Exception as e:
             print(f"Error : {e}")
         return detail_info
+
+    def block_porcess_traffic(self, pid):
+        self.service.block_process_traffic(pid)

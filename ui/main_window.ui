@@ -849,7 +849,7 @@ QFrame {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="page_process_info_menu">
              <property name="sizePolicy">
@@ -934,7 +934,7 @@ QFrame#process_info_btn_group {
                  <item>
                   <widget class="QStackedWidget" name="process_stackedWidget">
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="search_page">
                     <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -1085,7 +1085,7 @@ QFrame#process_info_btn_group {
                      <item>
                       <widget class="QStackedWidget" name="insert_pe_stackedWidget">
                        <property name="currentIndex">
-                        <number>2</number>
+                        <number>1</number>
                        </property>
                        <widget class="QWidget" name="fileDropPage">
                         <layout class="QHBoxLayout" name="horizontalLayout_20">
@@ -3493,7 +3493,7 @@ QFrame {
               <item>
                <widget class="QStackedWidget" name="network_stackedWidget">
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>1</number>
                 </property>
                 <widget class="QWidget" name="network_process_page">
                  <layout class="QVBoxLayout" name="verticalLayout_29">
@@ -3931,7 +3931,7 @@ QLabel#content, QLabel#content_2, QLabel#content_3, QLabel#content_4, QLabel#con
 }</string>
                        </property>
                        <property name="currentIndex">
-                        <number>0</number>
+                        <number>1</number>
                        </property>
                        <widget class="QWidget" name="tab_network_log">
                         <property name="sizePolicy">

@@ -126,7 +126,7 @@ QTableWidget::item::selected {
       </size>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page_process_info">
       <property name="styleSheet">
@@ -1678,32 +1678,32 @@ QFrame {
                </column>
                <item row="0" column="0">
                 <property name="text">
-                 <string>test</string>
+                 <string/>
                 </property>
                </item>
                <item row="0" column="1">
                 <property name="text">
-                 <string>test</string>
+                 <string/>
                 </property>
                </item>
                <item row="0" column="2">
                 <property name="text">
-                 <string>tset</string>
+                 <string/>
                 </property>
                </item>
                <item row="0" column="3">
                 <property name="text">
-                 <string>tset</string>
+                 <string/>
                 </property>
                </item>
                <item row="0" column="4">
                 <property name="text">
-                 <string>set</string>
+                 <string/>
                 </property>
                </item>
                <item row="0" column="5">
                 <property name="text">
-                 <string>ㄷㅇㅁㄹㅇ</string>
+                 <string/>
                 </property>
                </item>
               </widget>
@@ -1982,57 +1982,57 @@ QHeaderView::section {
                    </column>
                    <item row="0" column="0">
                     <property name="text">
-                     <string>test</string>
+                     <string/>
                     </property>
                    </item>
                    <item row="0" column="1">
                     <property name="text">
-                     <string>test</string>
+                     <string/>
                     </property>
                    </item>
                    <item row="0" column="2">
                     <property name="text">
-                     <string>tset</string>
+                     <string/>
                     </property>
                    </item>
                    <item row="0" column="3">
                     <property name="text">
-                     <string>tset</string>
+                     <string/>
                     </property>
                    </item>
                    <item row="0" column="4">
                     <property name="text">
-                     <string>set</string>
+                     <string/>
                     </property>
                    </item>
                    <item row="0" column="5">
                     <property name="text">
-                     <string>ㄷㄴㅅㅁㅅㄷ</string>
+                     <string/>
                     </property>
                    </item>
                    <item row="1" column="0">
                     <property name="text">
-                     <string>dsafasf</string>
+                     <string/>
                     </property>
                    </item>
                    <item row="1" column="1">
                     <property name="text">
-                     <string>asdf</string>
+                     <string/>
                     </property>
                    </item>
                    <item row="1" column="2">
                     <property name="text">
-                     <string>safsadf</string>
+                     <string/>
                     </property>
                    </item>
                    <item row="1" column="3">
                     <property name="text">
-                     <string>asfsaf</string>
+                     <string/>
                     </property>
                    </item>
                    <item row="1" column="4">
                     <property name="text">
-                     <string>sadf</string>
+                     <string/>
                     </property>
                    </item>
                   </widget>

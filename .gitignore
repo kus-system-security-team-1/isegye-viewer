@@ -3,3 +3,8 @@ __pycache__/
 .benchmarks/
 .pytest_cache/
 file_access.log
+lib/*
+build/
+dist/
+log/
+filtering_table.json

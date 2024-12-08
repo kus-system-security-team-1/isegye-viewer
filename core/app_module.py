@@ -17,10 +17,11 @@ class AppModule:
                         print(f"Failed to initialize {class_name}: {e}")
 
     def init_modules(self, main_window=None):
-        self._load_modules("modules.main", "Controller", main_window)
         self._load_modules("modules.process", "Controller", main_window)
         self._load_modules("modules.history", "Controller", main_window)
         self._load_modules("modules.pe", "Controller", main_window)
+        self._load_modules("modules.network", "Controller", main_window)
+        self._load_modules("modules.main", "Controller", main_window)
 
     def _load_modules(self, package_path, class_suffix, main_window=None):
         package = importlib.import_module(package_path)
@@ -36,7 +37,9 @@ class AppModule:
                     if attribute_name.endswith(class_suffix):
                         controller_class = getattr(module, attribute_name)
                         instance = controller_class(
-                            config={"lib": self.lib}, view=main_window
+                            config={"lib": self.lib},
+                            view=main_window,
+                            app_module=self,
                         )
                         self.controllers[attribute_name] = instance
 

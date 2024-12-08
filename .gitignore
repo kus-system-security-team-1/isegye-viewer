@@ -6,3 +6,5 @@ file_access.log
 lib/*
 build/
 dist/
+log/
+filtering_table.json

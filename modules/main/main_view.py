@@ -79,6 +79,11 @@ class MainWindow(QMainWindow, BaseWindow):
         self.selected_process_label.setWordWrap(True)
         self.dll_table.setWordWrap(True)
 
+        self.btn_network_block.toggled.connect(self.on_network_block_toggled)
+        self.network_stackedWidget.currentChanged.connect(
+            self.on_network_page_changed
+        )
+
         self.prev_menu_group.setVisible(False)
         self.btn_past.setVisible(False)
         self.btn_process_menu.setChecked(True)
@@ -357,6 +362,43 @@ class MainWindow(QMainWindow, BaseWindow):
                 )
             )
             self.filtering_table.setCellWidget(row, 2, delete_button)
+
+    def on_network_block_toggled(self, checked):
+        try:
+            pid = self.controller.network_current_pid
+            if pid is None:
+                self.btn_network_block.blockSignals(True)
+                self.btn_network_block.setChecked(True)
+                self.btn_network_block.blockSignals(False)
+                return
+            if checked:
+                self.controller.block_process_traffic(pid)
+            else:
+                self.controller.unblock_process_traffic(pid)
+
+        except Exception as e:
+            print(f"Try to block: {e}")
+
+    def on_network_page_changed(self, index):
+        try:
+            if index != 1 or self.page_stackedWidget.currentIndex() != 2:
+                pid = self.controller.network_current_pid
+                if pid is not None and self.btn_network_block.isChecked():
+                    self.controller.unblock_process_traffic(pid)
+                    self.btn_network_block.blockSignals(True)
+                    self.btn_network_block.setChecked(False)
+                    self.btn_network_block.blockSignals(False)
+        except Exception as e:
+            print(f"page changed error : {e}")
+
+    def closeEvent(self, event):
+        try:
+            pid = self.controller.network_current_pid
+            if pid is not None and self.btn_network_block.isChecked():
+                self.controller.unblock_process_traffic(pid)
+            super(MainWindow, self).closeEvent(event)
+        except Exception as e:
+            print(f"closedEvent error: {e}")
 
 
 class PrevHistoryWindow(QWidget, BaseWindow):

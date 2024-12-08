@@ -17,6 +17,7 @@ class AppModule:
                         print(f"Failed to initialize {class_name}: {e}")
 
     def init_modules(self, main_window=None):
+        self._load_modules("modules.network", "Controller", main_window)
         self._load_modules("modules.process", "Controller", main_window)
         self._load_modules("modules.history", "Controller", main_window)
         self._load_modules("modules.pe", "Controller", main_window)

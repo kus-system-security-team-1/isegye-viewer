@@ -32,6 +32,9 @@ class MainController:
         self.process_controller = self.app_module.get_controller(
             "ProcesssController"
         )
+        self.network_controller = self.app_module.get_controller(
+            "NetworkController"
+        )
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_tables)
@@ -382,7 +385,7 @@ class MainController:
 
                 self.view.network_log_table.setRowCount(0)
                 self.refresh_network_data()
-                self.network_timer.start(1000)
+                self.network_timer.start(2000)
             else:
                 print(
                     "Network toggle is not checked. Monitoring cannot start."
@@ -434,12 +437,11 @@ class MainController:
 
     def stop_network_monitoring(self):
         self.network_timer.stop()
-        self.current_pid = None
 
     def check_network_page(self, index):
         if index == 1 and self.view.network_toggle.isChecked():
             if self.network_current_pid:
-                self.network_timer.start(1000)
+                self.network_timer.start(2000)
             else:
                 self.stop_network_monitoring()
 
@@ -449,9 +451,23 @@ class MainController:
                 self.view.network_stackedWidget.currentIndex() == 1
                 and self.network_current_pid
             ):
-                self.network_timer.start(1000)
+                self.network_timer.start(2000)
             else:
                 self.stop_network_monitoring()
+
+    def block_process_traffic(self, pid):
+        try:
+            self.network_controller.block_process_traffic(int(pid))
+            print(f"Success of block traffic. PID : {pid}")
+        except Exception as e:
+            print(f"Fail to block traffic. Error: {e}")
+
+    def unblock_process_traffic(self, pid):
+        try:
+            self.network_controller.unblock_process_traffic(int(pid))
+            print(f"Success of unblock traffic.")
+        except Exception as e:
+            print(f"Fail to unblock traffic. Error: {e}")
 
     def search_dll(self):
         search_text = self.view.dll_search_bar.text().strip()
@@ -464,13 +480,10 @@ class MainController:
         matching_rows = []
 
         for row in range(row_count):
-            dll_item = self.view.dll_table.item(
-                row, 1
-            )  # DLL 경로가 있는 열 가져오기
+            dll_item = self.view.dll_table.item(row, 1)
             if dll_item and search_text.lower() in dll_item.text().lower():
                 matching_rows.append((row, dll_item.text()))
 
-        # 검색 결과를 테이블에 표시
         if matching_rows:
             self.view.dll_table.setRowCount(len(matching_rows))
             for index, (original_row, dll_path) in enumerate(matching_rows):
@@ -480,14 +493,12 @@ class MainController:
                 self.view.dll_table.setItem(index, 0, index_item)
                 self.view.dll_table.setItem(index, 1, dll_item)
         else:
-            # 검색 결과가 없으면 "존재하지 않습니다" 표시
             self.view.dll_table.setRowCount(1)
             self.view.dll_table.setColumnCount(1)
             self.view.dll_table.setItem(
                 0, 0, QTableWidgetItem("존재하지 않습니다")
             )
 
-        # 테이블 레이아웃 조정
         self.view.dll_table.setColumnWidth(0, 30)
         self.view.dll_table.setColumnWidth(1, 870)
 
